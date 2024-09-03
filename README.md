@@ -4,17 +4,17 @@ This is an Expo react-native front-end project for quizing staff engagement for 
 
 ## Version 1.0
 
-Sign in/Sign up (no back end implemented yet):
+### Sign in/Sign up (no back end implemented yet):
 - Sign-up: Register for an account using name, email, D.O.B, place of work and password. When the manager of your branch accepts your request, you will then be able to sign in
 - Sign-in: using a pre-registered account
 
-Home:
+### Home:
 - Users can see their 'previous scores' in a graph (dummy data to begin with)
 - A learning resources tab so that the users can learn more about hair containment before taking the test. (not populated yet)
 
 ![homepage](https://github.com/alexgburnet/Hairtite-App/blob/master/README%20images/v1.0%20home.png)
 
-Quiz:
+### Quiz:
 - Consists of 8 true/false questions
 
 ![quizpage](https://github.com/alexgburnet/Hairtite-App/blob/master/README%20images/v1.0%20quiz.png)

@@ -9,7 +9,7 @@ const Index = () => {
     <SafeAreaView style={styles.safeArea}>
         <View style={styles.container}>
             <Image 
-                source={require('../assets/images/logo.png')}
+                source={require('../assets/images/hairtiteRetailLogo.png')}
                 style={styles.logo}
             />
             <Text style={styles.title}>Measuring Staff Engagement for Hair Containment</Text>
@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     logo: {
-        width: 200,
-        height: 200,
+        height: 130,
+        resizeMode: 'contain',
     }
 });
 

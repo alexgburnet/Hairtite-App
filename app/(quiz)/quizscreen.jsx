@@ -15,19 +15,55 @@ const questions = [
     fanswer: true,
   },
   {
-    question: "Do modern styling & hair-care practices damage hair?",
+    question: "Modern styling & hair-care practices damages hair",
     answer: true,
     info: "A) Excessive heat - higher temperature from / of hair driers / styling tongues/straighteners\n\nB) Perm solutions, dyes / straightening chemicals – Trichologists believe",
     followup: "Using hot tools like dryers or straighteners and chemicals like perm solutions impacts hair contamination.",
     fanswer: true,
   },
   {
-    question: "Does washing and combing remove all residual hair?",
+    question: "Washing and combing removes all residual hair?",
     answer: false,
-    info: "NO. (Prof. Barry Stevens FTTS President of The Trichological Society 2014-16 says: “Staphylococci/streptococci may present at sites of infection with e.g. impetigo, insect bites, minor trauma, eczema etc. whilst it is known that the scalp can be a haven for bacteria - especially the relatively harmless Malassez Furfur (Pityrosporum Ovale). I am unable to eliminate hair shafts as disease carriers (i.e. Staphylococcus Aureus). However, hand contact with the scalp during food production is probably more likely to act as a carrier therefore complete head hair covering is recommended. I cannot ignore the potential for contamination via beard hair as this can be an involuntary target of touch by infrequently washed hands. Covering the beard with net is therefore a wise precaution”.",
+    info: "(Prof. Barry Stevens FTTS President of The Trichological Society 2014-16 says: “Staphylococci/streptococci may present at sites of infection with e.g. impetigo, insect bites, minor trauma, eczema etc. whilst it is known that the scalp can be a haven for bacteria - especially the relatively harmless Malassez Furfur (Pityrosporum Ovale). I am unable to eliminate hair shafts as disease carriers (i.e. Staphylococcus Aureus). However, hand contact with the scalp during food production is probably more likely to act as a carrier therefore complete head hair covering is recommended. I cannot ignore the potential for contamination via beard hair as this can be an involuntary target of touch by infrequently washed hands. Covering the beard with net is therefore a wise precaution”.",
     followup: "Daily combed hair, well-groomed beard, neatly trimmed brows and daily showering prevent removal of all loose hairs.",
     fanswer: false,
   },
+  {
+    question: "Digested hair contained within foods will make you physically sick?",
+    answer: false,
+    info: "Hair is protein and can be digested!",
+    followup: "If you eat hair, you're likely to be sick",
+    fanswer: false,
+  },
+  {
+    question: "digested hair contained within foods is likely to make you feel sick",
+    answer: true,
+    info: "In most people the thought makes people feel sick – can and in most people does trigger an emotional reaction \n\nMost people will stop eating and it will kill their appetite – AND they will stop eating",
+    followup: "If you find hair in your meal, even if you don’t eat it you might feel sick.",
+    fanswer: true,
+  },
+  {
+    question: "Contact with the head can cause food poisoning?",
+    answer: true,
+    info: "All people – with good hygiene – sweaty areas of skin such as the scalp contain food poisoning pathogen Staphylocci Aureus. If you touch your hand and then food – whether your hand is gloved or not – you can transfer food poisoning pathogens to the food you serve to your customers. – it’s a fact!",
+    followup: "If I scratch my head, it is possible I can cause food poisoning?",
+    fanswer: true,
+  },
+  {
+    question: "Your actions help prevent food poisoning?",
+    answer: true,
+    info: "",
+    followup: "How I work helps prevent food poisoning.",
+    fanswer: true,
+  },
+  {
+    question: "Short hair poses a greater risk of contamination?",
+    answer: true,
+    info: "Short hair is more likely to stand upright and protrude through gaps including needle holes in all knitted, woven particularly non-woven fabrics.\n\nShort hair is less easily seen than long hair and therefore, may fall into food unseen and when eating food seen as the food is closer to the eyes and mouth.",
+    followup: "short hair has a greater risk of contamination than long hair?",
+    fanswer: true,
+  },
+  
 ];
 
 const QuizScreen = () => {

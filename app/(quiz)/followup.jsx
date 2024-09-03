@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
   },
   factContainer: {
     padding: 20,
+    marginHorizontal: 20,
     backgroundColor: '#fff',
     borderRadius: 15,
     marginVertical: 20,
@@ -125,6 +126,7 @@ const styles = StyleSheet.create({
   },
   newQuestion: {
     padding: 20,
+    marginHorizontal: 20,
     backgroundColor: '#fff',
     borderRadius: 15,
     marginVertical: 20,

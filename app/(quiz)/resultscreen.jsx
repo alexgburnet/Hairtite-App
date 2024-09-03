@@ -9,7 +9,7 @@ import { useQuiz } from '../../contexts/QuizContext';
 const ResultScreen = () => {
   const { score } = useLocalSearchParams();
   const router = useRouter();
-  const passThreshold = 2; // Set your passing score
+  const passThreshold = 8; // Set passing score
   const { resetQuiz } = useQuiz();
 
   return (

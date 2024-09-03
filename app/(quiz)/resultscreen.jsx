@@ -15,9 +15,16 @@ const ResultScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.resultText}>
-        {parseInt(score) >= passThreshold ? "Congratulations! You Passed!" : "Sorry, You Need to re-take the test."}
+        {parseInt(score) >= passThreshold ? "Congratulations! You Passed!" : "Sorry, you meet the pass mark"}
       </Text>
-      <Text style={styles.scoreText}>Your Score: {score}</Text>
+      <Text style={styles.scoreText}>Your Score: {score} / {passThreshold}</Text>
+      
+      {parseInt(score) < passThreshold && (
+        <Text style={styles.referencetext}>
+          Reference our learning resources and try again!
+        </Text>
+      )}
+
       <CustomButton
         title="Back To Home"
         handlePress={() => {
@@ -39,7 +46,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
   },
   resultText: {
-    fontSize: 26,
+    fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 15,
     textAlign: 'center',
@@ -49,6 +56,12 @@ const styles = StyleSheet.create({
   },
   failText: {
     color: '#F44336', // Red color for fail
+  },
+  referencetext: {
+    fontSize: 18,
+    color: '#555',
+    marginBottom: 30,
+    textAlign: 'center',
   },
   scoreText: {
     fontSize: 20,

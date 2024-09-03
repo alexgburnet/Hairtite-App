@@ -12,8 +12,7 @@ This is an Expo react-native front-end project for quizing staff engagement for 
 - Users can see their 'previous scores' in a graph (dummy data to begin with)
 - A learning resources tab so that the users can learn more about hair containment before taking the test. (not populated yet)
 
-![homepage](https://github.com/alexgburnet/Hairtite-App/blob/master/README%20images/v1.0%20home.png)
-<img src="https://github.com/alexgburnet/Hairtite-App/blob/master/README%20images/v1.0%20home.png" alt="home page" width="300"/>
+<img src="https://github.com/alexgburnet/Hairtite-App/blob/master/README%20images/v1.0%20home.png" alt="home page" width="600"/>
 
 ### Quiz:
 - Consists of 8 true/false questions

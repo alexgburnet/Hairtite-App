@@ -1,50 +1,23 @@
-# Welcome to your Expo app 👋
+# Hairtite retail app
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is an Expo react-native front-end project for quizing staff engagement for hair containment
 
-## Get started
+## Version 1.0
 
-1. Install dependencies
+Sign in/Sign up (no back end implemented yet):
+- Sign-up: Register for an account using name, email, D.O.B, place of work and password. When the manager of your branch accepts your request, you will then be able to sign in
+- Sign-in: using a pre-registered account
 
-   ```bash
-   npm install
-   ```
+Home:
+- Users can see their 'previous scores' in a graph (dummy data to begin with)
+- A learning resources tab so that the users can learn more about hair containment before taking the test. (not populated yet)
 
-2. Start the app
+![homepage]()
 
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Quiz:
+- Consists of 8 true/false questions
+- The user has two opportunities to get each question correct.
+- If it is answered correctly initially, the score is incremented.
+- If they get it wrong initially, a modal view pops up with some information to help them with the question, and a similar, rephrased followup question.
+- If the follow up question is answered correctly, the score is incremented
+- The user must get all questions correct to pass (Two atempts on each question, so it should be easy to pass, with a focus on staff **learning**, rather than testing)

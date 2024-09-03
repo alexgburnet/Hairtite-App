@@ -12,7 +12,7 @@ Home:
 - Users can see their 'previous scores' in a graph (dummy data to begin with)
 - A learning resources tab so that the users can learn more about hair containment before taking the test. (not populated yet)
 
-![homepage]()
+![homepage](https://github.com/alexgburnet/Hairtite-App/blob/master/README%20images/v1.0%20home.png)
 
 Quiz:
 - Consists of 8 true/false questions

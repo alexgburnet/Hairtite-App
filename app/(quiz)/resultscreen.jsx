@@ -15,7 +15,7 @@ const ResultScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.resultText}>
-        {parseInt(score) >= passThreshold ? "Congratulations! You Passed!" : "Sorry, You Failed."}
+        {parseInt(score) >= passThreshold ? "Congratulations! You Passed!" : "Sorry, You Need to re-take the test."}
       </Text>
       <Text style={styles.scoreText}>Your Score: {score}</Text>
       <CustomButton
@@ -32,9 +32,10 @@ const ResultScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
-    padding: 30,
+    paddingHorizontal: 30,
+    paddingVertical: 100,
     backgroundColor: '#f5f5f5',
   },
   resultText: {

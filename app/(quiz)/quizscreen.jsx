@@ -117,12 +117,12 @@ const QuizScreen = () => {
           <View style={styles.buttonContainer}>
             <CustomButton
               style={styles.yesButton}
-              title={"Yes"}
+              title={"True"}
               handlePress={() => handleAnswer(true)}
             />
             <CustomButton
               style={styles.noButton}
-              title={"No"}
+              title={"False"}
               handlePress={() => handleAnswer(false)}
             />
           </View>

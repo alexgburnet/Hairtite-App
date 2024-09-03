@@ -6,6 +6,14 @@ import { AntDesign } from '@expo/vector-icons';
 
 import CustomButton from '../../components/CustomButton';
 
+/**
+ * Followup screen for the app, displays some guidance and a followup question
+ * If this is answered correctly, the user will be shown a correct message and the next question
+ * If this is answered incorrectly, the quiz moves on to the next question
+ * 
+ * @returns {ReactElement} The followup screen
+*/
+
 const FollowupScreen = () => {
   const { incrementScore, nextQuestion, score } = useQuiz();
   const router = useRouter();

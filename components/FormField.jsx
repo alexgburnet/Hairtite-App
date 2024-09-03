@@ -1,6 +1,17 @@
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
 
+/**
+ * A component that renders a form field
+ * @param {string} title - The title of the field
+ * @param {string} value - The value of the field
+ * @param {string} placeholder - The placeholder of the field
+ * @param {function} handleChangeText - The function to handle the change of the text
+ * @param {object} otherStyles - The other styles to apply to the field
+ * 
+ * @returns {JSX.Element}
+*/
+
 const FormField = ({ title, value, placeholder, handleChangeText, otherStyles, ...props }) => {
 
     const [showPassword, setShowPassword] = useState(false)

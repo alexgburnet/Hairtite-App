@@ -6,6 +6,12 @@ import FormField from '../../components/FormField'
 import DateField from '../../components/DateField';
 import CustomButton from '../../components/CustomButton'
 
+/**
+ * Screen for the user to input their personal information for their account
+ * 
+ * @returns {JSX.Element}
+*/
+
 const aboutYou = () => {
   const [form, setForm] = useState({
     name: '',

@@ -5,6 +5,14 @@ import {
     LineChart,
   } from 'react-native-chart-kit'
 
+/**
+ * Custom Line Chart component
+ * @param {Array} data - The data to display in the chart
+ * @param {Number} width - The width of the chart
+ * 
+ * @returns {JSX.Element}
+ */
+
 const CustomLineChart = ({ data, width }) => {
 
   return (

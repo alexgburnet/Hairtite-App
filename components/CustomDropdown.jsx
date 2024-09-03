@@ -2,6 +2,13 @@ import { View, Text, StyleSheet } from 'react-native'
 import { Dropdown } from 'react-native-element-dropdown';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
+/**
+ * Custom Dropdown component
+ * @param {string} category - The category of the dropdown
+ * @param {Array} data - The data to display in the dropdown
+ * 
+ * @returns {JSX.Element}
+ */
 
 import React, { useState } from 'react'
 

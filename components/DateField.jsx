@@ -2,6 +2,16 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
+/**
+ * A component that renders a date input field
+ * @param {string} title - The title of the field
+ * @param {string} value - The value of the field
+ * @param {function} handleChangeDate - The function to handle the change of the date
+ * 
+ * @returns {JSX.Element}
+ * 
+ */
+
 const DateField = ({ title, value, handleChangeDate }) => {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 

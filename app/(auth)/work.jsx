@@ -19,6 +19,13 @@ const data = [
   { label: 'Item 8', value: '8' },
 ];
 
+/**
+ * 
+ * Screen for the user to input their work information for their account
+ * 
+ * @returns {JSX.Element}
+ */
+
 const work = () => {
   const [form, setForm] = useState({
     country: '',

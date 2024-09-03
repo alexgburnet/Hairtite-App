@@ -5,6 +5,12 @@ import { Link, router } from 'expo-router'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
 
+/**
+ * Screen to handle sign in
+ * 
+ * @returns {JSX.Element}
+*/
+
 const signIn = () => {
 
   const [form, setForm] = useState({

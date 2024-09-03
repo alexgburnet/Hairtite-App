@@ -4,6 +4,14 @@ import React from 'react';
 
 import CustomButton from '../../components/CustomButton';
 
+/**
+ * Screen for the user to see that their request has been sent
+ * They will be able to sign in once their manager has accepted the request
+ * This is to stop anyone from being able to say they work at a company without permission
+ * 
+ * @returns {JSX.Element}
+*/
+
 const requestSent = () => {
   return (
     <SafeAreaView style={styles.safeArea}>

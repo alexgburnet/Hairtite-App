@@ -5,6 +5,12 @@ import { Link, router } from 'expo-router'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
 
+/**
+ * Screen for the user to input their password for their account
+ * 
+ * @returns {JSX.Element}
+*/
+
 const password = () => {
 
   const [form, setForm] = useState({

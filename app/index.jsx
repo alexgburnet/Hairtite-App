@@ -4,6 +4,10 @@ import React from 'react';
 
 import CustomButton from '../components/CustomButton';
 
+/**
+ * Initial screen for the app
+ */
+
 const Index = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -14,7 +18,7 @@ const Index = () => {
             />
             <Text style={styles.title}>Measuring Staff Engagement for Hair Containment</Text>
             <CustomButton
-                style={styles.button}  // Apply custom styles here
+                style={styles.button}
                 title="Sign-In"
                 handlePress={() => {router.push('/sign-in')}}
             />
@@ -30,11 +34,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center', // Centers the items horizontally
+        alignItems: 'center',
         gap: 80,
     },
     button: {
-        width: '80%',  // Adjust the button width
+        width: '80%',
     },
     title: {
         width: '80%',

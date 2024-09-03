@@ -10,9 +10,11 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 
 SplashScreen.preventAutoHideAsync();
 
-/*
- * Root layout for the app, wraps the entire app in the QuizProvider and ThemeProvider
-*/
+/**
+ * layout for the app
+ * 
+ * @returns {JSX.Element}
+ */
 
 const RootLayout = () => {
   const colorScheme = useColorScheme();

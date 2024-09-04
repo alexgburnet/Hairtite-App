@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         marginBottom: 20,
         textAlign: 'center',
+        fontFamily: 'Poppins-Regular',
     },
     logo: {
         height: 130,

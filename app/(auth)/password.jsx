@@ -50,7 +50,9 @@ const password = () => {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 32,
+    fontSize: 38,
+    textAlign: 'center',
+    fontFamily: 'Poppins-Regular',
     justifyContent: 'center'
   },
   forms: {

@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
       title: {
         fontSize: 16,
         paddingBottom: 5,
-        paddingLeft: 5
+        paddingLeft: 5,
+        fontFamily: 'Poppins-Light',
       },
       inputContainer: {
         borderWidth: 2,

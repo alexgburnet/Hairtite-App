@@ -46,11 +46,13 @@ const styles = StyleSheet.create({
         width: '80%',  // Adjust the button width
     },
     thankyou: {
-        fontSize: 32,
+        fontSize: 38,
+        fontFamily: 'Poppins-Regular',
         textAlign: 'center',
     },
     message: {
         fontSize: 18,
+        fontFamily: 'Poppins-Light',
         textAlign: 'center',
         width: '80%'
     },

@@ -68,8 +68,10 @@ const work = () => {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 32,
-    justifyContent: 'center'
+    fontSize: 38,
+    justifyContent: 'center',
+    textAlign: 'center',
+    fontFamily: 'Poppins-Regular',
   },
   forms: {
     justifyContent: 'center',

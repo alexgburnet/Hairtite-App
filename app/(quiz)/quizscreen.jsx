@@ -24,7 +24,7 @@ const questions = [
   {
     question: "Washing and combing removes all residual hair?",
     answer: false,
-    info: "Prof. Barry Stevens FTTS President of The Trichological Society 2014-16 says: “Staphylococci/streptococci may present at sites of infection with e.g. impetigo, insect bites, minor trauma, eczema etc. whilst it is known that the scalp can be a haven for bacteria - especially the relatively harmless Malassez Furfur (Pityrosporum Ovale). I am unable to eliminate hair shafts as disease carriers (i.e. Staphylococcus Aureus). However, hand contact with the scalp during food production is probably more likely to act as a carrier therefore complete head hair covering is recommended. I cannot ignore the potential for contamination via beard hair as this can be an involuntary target of touch by infrequently washed hands. Covering the beard with net is therefore a wise precaution”.",
+    info: "",
     followup: "Daily combed hair, well-groomed beard, neatly trimmed brows and daily showering prevent removal of all loose hairs.",
     fanswer: false,
   },
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
   },
   questionNumber: {
     fontSize: 28,
-    fontWeight: '600',
+    fontFamily: 'Poppins-Bold',
     color: '#333',
   },
   questionTextContainer: {
@@ -182,6 +182,7 @@ const styles = StyleSheet.create({
   },
   questionText: {
     fontSize: 18,
+    fontFamily: 'Poppins-Light',
     textAlign: 'center',
     color: '#555',
   },
@@ -210,13 +211,14 @@ const styles = StyleSheet.create({
   correctMessage: {
     fontSize: 48,
     color: '#4CAF50',
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
     textAlign: 'center',
     marginBottom: 20,
   },
   scoreText: {
     marginTop: 20,
     fontSize: 24,
+    fontFamily: 'Poppins-Regular',
     color: '#333',
   },
 });

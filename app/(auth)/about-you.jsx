@@ -66,8 +66,10 @@ const aboutYou = () => {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 32,
-    justifyContent: 'center'
+    fontSize: 38,
+    justifyContent: 'center',
+    fontFamily: 'Poppins-Regular',
+    textAlign: 'center',
   },
   forms: {
     justifyContent: 'center',
@@ -79,7 +81,8 @@ const styles = StyleSheet.create({
   },
   bottomtext: {
     textAlign: 'center',
-    fontSize: 18
+    fontSize: 18,
+    fontFamily: 'Poppins-Light',
   },
   link: {
     color: 'rgb(31, 73, 133)'

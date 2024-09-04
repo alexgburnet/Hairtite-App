@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'rgba(255, 255, 255, 0.9)',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
   },
 });
 

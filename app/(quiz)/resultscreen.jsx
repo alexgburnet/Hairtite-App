@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   resultText: {
     fontSize: 28,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Regular',
     marginBottom: 15,
     textAlign: 'center',
   },
@@ -59,12 +59,14 @@ const styles = StyleSheet.create({
   },
   referencetext: {
     fontSize: 18,
+    fontFamily: 'Poppins-thin',
     color: '#555',
     marginBottom: 30,
     textAlign: 'center',
   },
   scoreText: {
     fontSize: 20,
+    fontFamily: 'Poppins-Regular',
     color: '#555',
     marginBottom: 30,
     textAlign: 'center',

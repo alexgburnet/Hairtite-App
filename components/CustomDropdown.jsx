@@ -29,6 +29,7 @@ const CustomDropdown = ({ category, data}) => {
 
           iconStyle={styles.iconStyle}
           data={data}
+          fontFamily='Poppins-Light'
           search
           maxHeight={300}
           labelField="label"
@@ -52,9 +53,10 @@ const CustomDropdown = ({ category, data}) => {
       width: '100%'
     },
     title: {
-        fontSize: 16,
-        paddingBottom: 5,
-        paddingLeft: 5
+      fontSize: 16,
+      paddingBottom: 5,
+      paddingLeft: 5,
+      fontFamily: 'Poppins-Light',
     },
     dropdown: {
       height:64,

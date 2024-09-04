@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
+    fontFamily: 'Poppins-Light',
     textAlign: 'center'
   }
 })

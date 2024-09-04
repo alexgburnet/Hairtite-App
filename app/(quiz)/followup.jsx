@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
     fontSize: 40,
     color: '#F44336',
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
   },
   factContainer: {
     padding: 20,
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   },
   didyouknow: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
     color: '#333',
     marginBottom: 10,
   },
@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
   infotext: {
     fontSize: 16,
     color: '#555',
+    fontFamily: 'Poppins-Regular',
   },
   newQuestion: {
     padding: 20,
@@ -148,12 +149,13 @@ const styles = StyleSheet.create({
   },
   apply: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
     color: '#333',
     marginBottom: 10,
   },
   question: {
     fontSize: 16,
+    fontFamily: 'Poppins-Regular',
     color: '#555',
   },
   buttonContainer: {
@@ -181,13 +183,14 @@ const styles = StyleSheet.create({
   correctMessage: {
     fontSize: 48,
     color: '#4CAF50',
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
     textAlign: 'center',
     marginBottom: 20,
   },
   scoreText: {
     marginTop: 20,
     fontSize: 24,
+    fontFamily: 'Poppins-Regular',
     color: '#333',
   },
 });

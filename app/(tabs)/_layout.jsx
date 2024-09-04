@@ -43,7 +43,7 @@ const _layout = () => {
       <Tabs.Screen
         name="learning-resources"
         options={({ route }) => ({
-          title: "Learning Resources",
+          title: "Learning",
           headerShown: true,
           headerStyle: {
             height: 110,

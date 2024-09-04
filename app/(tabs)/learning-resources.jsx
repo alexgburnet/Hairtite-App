@@ -43,7 +43,7 @@ const learningResources = () => {
     <>
       <ScrollView>
         <View style = {styles.textContainer}>
-          <Text style={styles.title}>Learning Resources</Text>
+          <Text style={styles.title}>Learning Resources:</Text>
         </View>
         {resources.map((resource, index) => (
           <CustomLearningResource
@@ -69,10 +69,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     margin: 10,
-    borderRadius: 16,
-    borderWidth: 0.5,
-    borderColor: 'rgb(220, 220, 220)',
-    backgroundColor: 'white',
     padding: 10,
   },
 })

@@ -1,48 +1,33 @@
-import { View, ScrollView, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react';
+import { View, ScrollView, Text, StyleSheet, Modal, Button, SafeAreaView } from 'react-native';
+import { WebView } from 'react-native-webview';
 
-import CustomLearningResource from '../../components/CustomLearningResource'
+import CustomLearningResource from '../../components/CustomLearningResource';
+import CustomButton from '../../components/CustomButton';
 
-const learningResources = () => {
+const LearningResources = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [currentUrl, setCurrentUrl] = useState('');
 
   const resources = [
     {
       title: 'Lorem Ipsum',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu augue nec elit mollis convallis vitae ac odio. Pellentesque et elit arcu. Sed at leo quis sem porta rhoncus ut.',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
       imageURL: 'https://placehold.co/400x400.png',
+      linkURL: 'https://www.youtube.com/@ABurnetHCS',
     },
-    {
-      title: 'Lorem Ipsum',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget sem at nisl varius aliquam. Nunc a fermentum nisl, ac placerat justo. Nulla id mattis dui, et mattis erat. Sed.',
-      imageURL: 'https://placehold.co/400x400.png',
-    },
-    {
-      title: 'Lorem Ipsum',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer gravida egestas arcu, non euismod erat dapibus nec. Cras mi neque, feugiat in egestas a, mattis non est. Etiam condimentum sapien.',
-      imageURL: 'https://placehold.co/400x400.png',
-    },
-    {
-      title: 'Lorem Ipsum',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam gravida, orci id consectetur varius, velit mauris mollis ligula, vel iaculis nibh ante ac nibh. Nam eu lectus vel nunc molestie.',
-      imageURL: 'https://placehold.co/400x400.png',
-    },
-    {
-      title: 'Lorem Ipsum',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod sem vel augue rutrum, ac egestas erat pharetra. Pellentesque et tortor orci. Proin ornare leo ut magna accumsan, vel dignissim.',
-      imageURL: 'https://placehold.co/400x400.png',
-    },
-    {
-      title: 'Lorem Ipsum',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sem urna, finibus eu orci sed, malesuada sodales erat. Fusce nibh nisi, volutpat id neque nec, volutpat condimentum odio. Nam fermentum.',
-      imageURL: 'https://placehold.co/400x400.png',
-    },
-    
-  ]
+    // Add other resources as needed
+  ];
+
+  const openLinkInModal = (url) => {
+    setCurrentUrl(url);
+    setModalVisible(true);
+  };
 
   return (
     <>
       <ScrollView>
-        <View style = {styles.textContainer}>
+        <View style={styles.textContainer}>
           <Text style={styles.title}>Learning Resources:</Text>
         </View>
         {resources.map((resource, index) => (
@@ -51,12 +36,28 @@ const learningResources = () => {
             title={resource.title}
             description={resource.description}
             imageURL={resource.imageURL}
+            linkURL={resource.linkURL}
+            onPress={() => openLinkInModal(resource.linkURL)} // Pass the handler here
           />
         ))}
       </ScrollView>
+
+      <Modal
+        animationType="slide"
+        transparent={false}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <SafeAreaView style={styles.safeArea}>
+          <View style={styles.modalHeader}>
+            <Button title="Close" onPress={() => setModalVisible(false)} />
+          </View>
+          <WebView source={{ uri: currentUrl }} style={styles.webView} />
+        </SafeAreaView>
+      </Modal>
     </>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   title: {
@@ -71,6 +72,16 @@ const styles = StyleSheet.create({
     margin: 10,
     padding: 10,
   },
-})
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  modalHeader: {
+    paddingHorizontal: 20,
+  },
+  webView: {
+    flex: 1,
+  },
+});
 
-export default learningResources
+export default LearningResources;

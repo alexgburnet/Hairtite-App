@@ -1,4 +1,4 @@
-# Hairtite retail app (No Backend implementation)
+# Hairtite retail app
 
 This is an Expo react-native front-end project for quizing staff engagement for hair containment
 

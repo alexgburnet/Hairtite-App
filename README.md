@@ -2,7 +2,7 @@
 
 This is an Expo react-native front-end project for quizing staff engagement for hair containment
 
-## Version 1.1.1
+## Version 1.1.1 (no back end implemented yet)
 
 ### Clickable Link to Youtube Shorts for learning resources
 
@@ -11,6 +11,7 @@ This is an Expo react-native front-end project for quizing staff engagement for 
 </p>
 
 - Can now click on a resource and it will bring up the video within your default browser, within the app.
+- URL is parsed to find video ID. This is then used to find the thumbnail, which is what is used for the image
 
 ## Version 1.1 (no back end implemented yet)
 

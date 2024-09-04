@@ -4,21 +4,21 @@ This is an Expo react-native front-end project for quizing staff engagement for 
 
 ## Version 1.1 (no back end implemented yet)
 
-## Changed status bar
+### Changed status bar
 - Status Bar changed to be black so that it is visible against black background
 
 <p align="center">
   <img src="https://github.com/alexgburnet/Hairtite-App/blob/main/README%20images/v1.1/login.png" alt="login page" width="500"/>
 </p>
 
-## Home welcome message
+### Home welcome message
 - Added a welcome message to home page to fill empty space
 
 <p align="center">
   <img src="https://github.com/alexgburnet/Hairtite-App/blob/main/README%20images/v1.1/home.png" alt="home page" width="500"/>
 </p>
 
-## Added templates for learning resources
+### Added templates for learning resources
 - Added a custom 'learning resource' component
 - Application then maps a list of resources to this template, filling up a scroll view
 - This will eventually come from a server for dynamic content

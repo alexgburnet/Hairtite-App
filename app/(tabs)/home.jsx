@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native'
+import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native'
 import React, { useState } from 'react'
 import { router } from 'expo-router'
 
@@ -27,14 +27,15 @@ const home = () => {
         }}
       > 
         <Text style={styles.title}>Your Progress</Text>
-        <CustomLineChart data={data} width={width}/>
+        <CustomLineChart data={data} width={width} height={175}/>
       </View>
 
       <View style={styles.textContainer}>
         <Text style={styles.title}>Welcome to the <Text style={{ color: 'rgb(31, 73, 133)', fontFamily: 'Poppins-Medium' }}>Hairtite Retail</Text> App!</Text>
         <Text style={styles.text1}>Please take the quiz to get started</Text>
-        <Text style={styles.text2}>This app will help you <Text style={styles.highlight}>assess and improve</Text> your knowledge and usage of Hairtite Retail <Text style={styles.highlight}>Hair Containment Devices</Text></Text>
+        <Text style={styles.text2}>This app will help you <Text style={styles.highlight}>assess and improve</Text> your knowledge and usage of our HACCP International Certified Hairtite Retail <Text style={styles.highlight}>Hair Containment Devices</Text></Text>
         <Text style={styles.text3}>Your insights are valuable for maintaining <Text style={styles.highlight}>safety and compliance</Text> in the workplace</Text>
+        <Image source={require('../../assets/images/HACCP.png')} style={{ width: 50, height: 50 }} />
       </View>
 
       <CustomButton 
@@ -47,7 +48,6 @@ const home = () => {
 
 const styles = StyleSheet.create({
   chartcontainer: {
-    width: '100%',
     borderRadius: 16,
     borderWidth: 0.5,
     borderColor: 'rgb(220, 220, 220)',

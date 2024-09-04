@@ -4,6 +4,7 @@ import { WebView } from 'react-native-webview';
 
 import CustomLearningResource from '../../components/CustomLearningResource';
 import CustomButton from '../../components/CustomButton';
+import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
 
 const LearningResources = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -11,10 +12,10 @@ const LearningResources = () => {
 
   const resources = [
     {
-      title: 'Lorem Ipsum',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
-      imageURL: 'https://placehold.co/400x400.png',
-      linkURL: 'https://www.youtube.com/@ABurnetHCS',
+      title: 'Why is it so important?',
+      description: '- How do customers react to finding hair in their food?\n- How would you deal with it?\n- Watch this video to find out!',
+      imageURL: 'https://img.youtube.com/vi/2fs8kYYEGlI/default.jpg',
+      linkURL: 'https://youtube.com/shorts/2fs8kYYEGlI?feature=share',
     },
     // Add other resources as needed
   ];
@@ -23,6 +24,12 @@ const LearningResources = () => {
     setCurrentUrl(url);
     setModalVisible(true);
   };
+
+  getThumbnailUrl = (url) => {
+    // video id is after shorts/ and before ? in the url
+    const videoId = url.split('shorts/')[1].split('?')[0];
+    return `https://img.youtube.com/vi/${videoId}/default.jpg`;
+  }
 
   return (
     <>
@@ -35,7 +42,7 @@ const LearningResources = () => {
             key={index}
             title={resource.title}
             description={resource.description}
-            imageURL={resource.imageURL}
+            imageURL={getThumbnailUrl(resource.linkURL)}
             linkURL={resource.linkURL}
             onPress={() => openLinkInModal(resource.linkURL)} // Pass the handler here
           />

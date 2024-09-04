@@ -9,18 +9,19 @@ import {
  * Custom Line Chart component
  * @param {Array} data - The data to display in the chart
  * @param {Number} width - The width of the chart
+ * @param {Number} height - The height of the chart
  * 
  * @returns {JSX.Element}
  */
 
-const CustomLineChart = ({ data, width }) => {
+const CustomLineChart = ({ data, width, height }) => {
 
   return (
     <View>
       <LineChart
         data={data}
         width={width} // from react-native
-        height={220}
+        height={height}
         yAxisLabel={'%'}
         chartConfig={{
           //backgroundGradientFrom: 'rgb(20, 60, 120)',

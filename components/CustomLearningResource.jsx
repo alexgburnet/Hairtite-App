@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     aspectRatio: 1,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     borderRadius: 10,
   },
   textContainer: {

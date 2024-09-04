@@ -32,7 +32,6 @@ const home = () => {
 
       <View style={styles.textContainer}>
         <Text style={styles.title}>Welcome to the <Text style={{ color: 'rgb(31, 73, 133)', fontFamily: 'Poppins-Medium' }}>Hairtite Retail</Text> App!</Text>
-        <Text style={styles.text1}>Please take the quiz to get started</Text>
         <Text style={styles.text2}>This app will help you <Text style={styles.highlight}>assess and improve</Text> your knowledge and usage of our HACCP International Certified Hairtite Retail <Text style={styles.highlight}>Hair Containment Devices</Text></Text>
         <Text style={styles.text3}>Your insights are valuable for maintaining <Text style={styles.highlight}>safety and compliance</Text> in the workplace</Text>
         <Image source={require('../../assets/images/HACCP.png')} style={{ width: 50, height: 50 }} />

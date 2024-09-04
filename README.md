@@ -2,6 +2,16 @@
 
 This is an Expo react-native front-end project for quizing staff engagement for hair containment
 
+## Version 1.1.1
+
+### Clickable Link to Youtube Shorts for learning resources
+
+<p align="center">
+  <img src="https://github.com/alexgburnet/Hairtite-App/blob/main/README%20images/v1.1/learningwiththumbnail.png" alt="learning page" width="500"/>
+</p>
+
+- Can now click on a resource and it will bring up the video within your default browser, within the app.
+
 ## Version 1.1 (no back end implemented yet)
 
 ### Home welcome message

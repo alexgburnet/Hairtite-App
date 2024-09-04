@@ -116,12 +116,14 @@ const QuizScreen = () => {
         </View>
       ) : (
         <>
+        <View style={styles.questionBoxContainer}>
           <View style={styles.questionBox}>
             <Text style={styles.questionNumber}>Question {currentQuestionIndex + 1}</Text>
             <View style={styles.questionTextContainer}>
               <Text style={styles.questionText}>{questions[currentQuestionIndex]?.question}</Text>
             </View>
           </View>
+        </View>
           <View style={styles.buttonContainer}>
             <CustomButton
               style={styles.yesButton}
@@ -155,8 +157,11 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#f4f4f4',
   },
+  questionBoxContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
   questionBox: {
-    marginTop: 150,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',

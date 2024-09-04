@@ -2,14 +2,15 @@ import { View, Text, StyleSheet, Image } from 'react-native'
 import React from 'react'
 
 const CustomLearningResource = ({ title, description, imageURL }) => {
+
   return (
     <View style={styles.container}>
-        <Image 
-            source={{ uri: imageURL }}
-            style={styles.image}
-        />
-        <View style={styles.textContainer}>
-            <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title}>{title}</Text>
+        <View style={styles.textAndPicture}>
+            <Image
+                source={{ uri: imageURL }}
+                style={styles.image}
+            />
             <Text style={styles.description}>{description}</Text>
         </View>
     </View>
@@ -19,7 +20,6 @@ const CustomLearningResource = ({ title, description, imageURL }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         gap: 10,
@@ -30,6 +30,13 @@ const styles = StyleSheet.create({
         padding: 15,
         marginHorizontal: 10,
         marginBottom: 10,
+    },
+    textAndPicture: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 15,
+
     },
     image: {
         flex: 1,
@@ -49,6 +56,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Regular',
     },
     description: {
+        flex: 3,
         fontSize: 12,
         textAlign: 'justify',
         fontFamily: 'Poppins-Light',

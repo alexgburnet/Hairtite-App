@@ -8,27 +8,27 @@ const learningResources = () => {
   const resources = [
     {
       title: 'Lorem Ipsum',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in.',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu augue nec elit mollis convallis vitae ac odio. Pellentesque et elit arcu. Sed at leo quis sem porta rhoncus ut.',
       imageURL: 'https://placehold.co/400x400.png',
     },
     {
       title: 'Lorem Ipsum',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dui lorem, dictum vel nulla nec.',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget sem at nisl varius aliquam. Nunc a fermentum nisl, ac placerat justo. Nulla id mattis dui, et mattis erat. Sed.',
       imageURL: 'https://placehold.co/400x400.png',
     },
     {
       title: 'Lorem Ipsum',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi vel sem eleifend semper.',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer gravida egestas arcu, non euismod erat dapibus nec. Cras mi neque, feugiat in egestas a, mattis non est. Etiam condimentum sapien.',
       imageURL: 'https://placehold.co/400x400.png',
     },
     {
       title: 'Lorem Ipsum',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eu neque ac risus faucibus congue.',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam gravida, orci id consectetur varius, velit mauris mollis ligula, vel iaculis nibh ante ac nibh. Nam eu lectus vel nunc molestie.',
       imageURL: 'https://placehold.co/400x400.png',
     },
     {
       title: 'Lorem Ipsum',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas turpis enim, facilisis quis vestibulum ut.',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod sem vel augue rutrum, ac egestas erat pharetra. Pellentesque et tortor orci. Proin ornare leo ut magna accumsan, vel dignissim.',
       imageURL: 'https://placehold.co/400x400.png',
     },
     {

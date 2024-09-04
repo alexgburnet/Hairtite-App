@@ -1,9 +1,9 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useRef } from 'react';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
+import ConfettiCannon from 'react-native-confetti-cannon';
 
 import CustomButton from '../../components/CustomButton';
-
 import { useQuiz } from '../../contexts/QuizContext';
 
 const ResultScreen = () => {
@@ -11,11 +11,34 @@ const ResultScreen = () => {
   const router = useRouter();
   const passThreshold = 8; // Set passing score
   const { resetQuiz } = useQuiz();
+  const confettiRef = useRef(null);
+
+  // Trigger confetti if the user passes
+  React.useEffect(() => {
+    if (parseInt(score) >= passThreshold && confettiRef.current) {
+      confettiRef.current.start();
+    }
+  }, [score, passThreshold]);
+
+  const screenWidth = Dimensions.get('window').width;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.resultText}>
-        {parseInt(score) >= passThreshold ? "Congratulations! You Passed!" : "Sorry, you meet the pass mark"}
+      <ConfettiCannon
+        ref={confettiRef}
+        count={400}
+        origin={{ x: screenWidth / 2, y: 0 }}
+        fadeOut
+        explosionSpeed={500}
+        // Customize other properties as needed
+      />
+      <Text
+        style={[
+          styles.resultText,
+          parseInt(score) >= passThreshold ? styles.passText : styles.failText,
+        ]}
+      >
+        {parseInt(score) >= passThreshold ? "Congratulations! You Passed!" : "Sorry, you didn't meet the pass mark"}
       </Text>
       <Text style={styles.scoreText}>Your Score: {score} / {passThreshold}</Text>
       

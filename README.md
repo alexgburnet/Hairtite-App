@@ -4,13 +4,6 @@ This is an Expo react-native front-end project for quizing staff engagement for 
 
 ## Version 1.1 (no back end implemented yet)
 
-### Changed status bar
-- Status Bar changed to be black so that it is visible against black background
-
-<p align="center">
-  <img src="https://github.com/alexgburnet/Hairtite-App/blob/main/README%20images/v1.1/login.png" alt="login page" width="500"/>
-</p>
-
 ### Home welcome message
 - Added a welcome message to home page to fill empty space
 
@@ -25,6 +18,18 @@ This is an Expo react-native front-end project for quizing staff engagement for 
 
 <p align="center">
   <img src="https://github.com/alexgburnet/Hairtite-App/blob/main/README%20images/v1.1/learning.png" alt="learning page" width="500"/>
+</p>
+
+### Added Confetti animation to results screen
+<p align="center">
+  <img src="https://github.com/alexgburnet/Hairtite-App/blob/main/README%20images/v1.1/confetti.png" alt="login page" width="500"/>
+</p>
+
+### Changed status bar
+- Status Bar changed to be black so that it is visible against black background
+
+<p align="center">
+  <img src="https://github.com/alexgburnet/Hairtite-App/blob/main/README%20images/v1.1/login.png" alt="login page" width="500"/>
 </p>
 
 

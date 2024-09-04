@@ -17,7 +17,7 @@ const requestSent = () => {
     <SafeAreaView style={styles.safeArea}>
         <View style={styles.container}>
             <Image 
-                source={require('../../assets/images/logo.png')}
+                source={require('../../assets/images/hairtiteRetailLogo.png')}
                 style={styles.logo}
             />
             <Text style={styles.thankyou}>Thank-You!</Text>
@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
         width: '80%'
     },
     logo: {
-        width: 200,
-        height: 200,
+        height: 130,
+        resizeMode: 'contain',
     }
 });
 

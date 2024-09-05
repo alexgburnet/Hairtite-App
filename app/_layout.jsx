@@ -6,8 +6,9 @@ import 'react-native-reanimated';
 import { StatusBar } from 'react-native';
 
 import { QuizProvider } from '../contexts/QuizContext'
-
 import { useColorScheme } from '@/hooks/useColorScheme';
+
+import { firebase } from '../firebaseConfig';
 
 SplashScreen.preventAutoHideAsync();
 

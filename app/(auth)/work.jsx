@@ -1,70 +1,85 @@
-import { View, Text, SafeAreaView, TouchableOpacity, StyleSheet } from 'react-native'
-import React, { useState } from 'react'
-import { Link, router } from 'expo-router'
-import { Dropdown } from 'react-native-element-dropdown';
-
-import FormField from '../../components/FormField'
-import DateField from '../../components/DateField';
-import CustomButton from '../../components/CustomButton'
+import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'expo-router';
+import CustomButton from '../../components/CustomButton';
 import CustomDropdown from '../../components/CustomDropdown';
-
-const data = [
-  { label: 'Item 1', value: '1' },
-  { label: 'Item 2', value: '2' },
-  { label: 'Item 3', value: '3' },
-  { label: 'Item 4', value: '4' },
-  { label: 'Item 5', value: '5' },
-  { label: 'Item 6', value: '6' },
-  { label: 'Item 7', value: '7' },
-  { label: 'Item 8', value: '8' },
-];
-
-/**
- * 
- * Screen for the user to input their work information for their account
- * 
- * @returns {JSX.Element}
- */
 
 const work = () => {
   const [form, setForm] = useState({
     country: '',
     company: '',
     branch: '',
-  })
+  });
+
+  const [countries, setCountries] = useState([]);
+  const [companies, setCompanies] = useState([]);
+  const [branches, setBranches] = useState([]);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    // Fetch countries from backend
+    fetch('http://127.0.0.1:5000/api/countries')
+      .then(response => response.json())
+      .then(data => setCountries(data))
+      .catch(error => console.error('Error fetching countries:', error));
+
+    // Fetch companies from backend
+    fetch('http://127.0.0.1:5000/api/companies')
+      .then(response => response.json())
+      .then(data => setCompanies(data))
+      .catch(error => console.error('Error fetching companies:', error));
+
+    // Fetch branches from backend
+    fetch('http://127.0.0.1:5000/api/branches')
+      .then(response => response.json())
+      .then(data => setBranches(data))
+      .catch(error => console.error('Error fetching branches:', error));
+  }, []);
+
+  const handleSelect = (category, value) => {
+    setForm((prevForm) => ({
+      ...prevForm,
+      [category]: value,
+    }));
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Where You Work</Text>
       
       <View style={styles.forms}>
-
         <CustomDropdown
           category="Country"
-          data={data}
+          data={countries.map(country => ({ label: country, value: country }))}
+          onSelect={(value) => handleSelect('country', value)}
         />
 
         <CustomDropdown
           category="Company"
-          data={data}
+          data={companies.map(company => ({ label: company, value: company }))}
+          onSelect={(value) => handleSelect('company', value)}
         />
 
         <CustomDropdown
           category="Branch"
-          data={data}
+          data={branches.map(branch => ({ label: branch, value: branch }))}
+          onSelect={(value) => handleSelect('branch', value)}
         />
-
       </View>
 
       <View style={styles.signin}>
         <CustomButton 
           title="Continue"
-          handlePress={() => {router.replace('/password')}}
+          handlePress={() => {
+            console.log('Form Data:', form);
+            router.replace('/password');
+          }}
         />
       </View>
     </SafeAreaView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   title: {
@@ -81,20 +96,13 @@ const styles = StyleSheet.create({
   signin: {
     gap: 30,
   },
-  bottomtext: {
-    textAlign: 'center',
-    fontSize: 18
-  },
-  link: {
-    color: 'rgb(31, 73, 133)'
-  },
   container: {
     flex: 1,
     alignContent: 'center',
     justifyContent: 'center',
     margin: 15,
     gap: 80,
-  }
-})
+  },
+});
 
 export default work;

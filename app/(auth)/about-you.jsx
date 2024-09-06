@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
 import React, { useState } from 'react'
-import { Link, router } from 'expo-router'
+import { router } from 'expo-router'
 
 import FormField from '../../components/FormField'
 import DateField from '../../components/DateField';

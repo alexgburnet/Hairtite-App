@@ -27,7 +27,7 @@ const _layout = () => {
           headerTitle: () => (
             <Image
               source={require('../../assets/images/hairtite-banner.png')}
-              style={{ width: 200, height: 40, margin: 10 }} // Adjust size as needed
+              style={{ width: 200, height: 40, margin: 10 }}
               resizeMode="contain"
             />
           ),
@@ -51,7 +51,7 @@ const _layout = () => {
           headerTitle: () => (
             <Image
               source={require('../../assets/images/hairtite-banner.png')}
-              style={{ width: 200, height: 40, margin: 10 }} // Adjust size as needed
+              style={{ width: 200, height: 40, margin: 10 }}
               resizeMode="contain"
             />
           ),

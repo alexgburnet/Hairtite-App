@@ -17,7 +17,6 @@ const LearningResources = () => {
       imageURL: 'https://img.youtube.com/vi/2fs8kYYEGlI/default.jpg',
       linkURL: 'https://youtube.com/shorts/2fs8kYYEGlI?feature=share',
     },
-    // Add other resources as needed
   ];
 
   const openLinkInModal = (url) => {
@@ -44,7 +43,7 @@ const LearningResources = () => {
             description={resource.description}
             imageURL={getThumbnailUrl(resource.linkURL)}
             linkURL={resource.linkURL}
-            onPress={() => openLinkInModal(resource.linkURL)} // Pass the handler here
+            onPress={() => openLinkInModal(resource.linkURL)}
           />
         ))}
       </ScrollView>

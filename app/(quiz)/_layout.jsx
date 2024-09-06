@@ -16,7 +16,7 @@ const quizLayout = () => {
             headerTitle: () => (
               <Image
                 source={require('../../assets/images/hairtite-banner.png')}
-                style={{ width: 200, height: 40, marginBottom: 10}} // Adjust size as needed
+                style={{ width: 200, height: 40, marginBottom: 10}}
                 resizeMode="contain"
               />
             ),
@@ -33,7 +33,7 @@ const quizLayout = () => {
             headerTitle: () => (
               <Image
                 source={require('../../assets/images/hairtite-banner.png')}
-                style={{ width: 200, height: 40 }} // Adjust size as needed
+                style={{ width: 200, height: 40 }}
                 resizeMode="contain"
               />
             ),

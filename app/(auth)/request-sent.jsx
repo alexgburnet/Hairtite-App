@@ -23,7 +23,7 @@ const requestSent = () => {
             <Text style={styles.thankyou}>Thank-You!</Text>
             <Text style={styles.message}>You will be able to sign in once your manager has accepted your request</Text>
             <CustomButton
-                style={styles.button}  // Apply custom styles here
+                style={styles.button}
                 title="Return"
                 handlePress={() => {router.dismissAll()}}
             />
@@ -39,11 +39,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center', // Centers the items horizontally
+        alignItems: 'center',
         gap: 80,
     },
     button: {
-        width: '80%',  // Adjust the button width
+        width: '80%',
     },
     thankyou: {
         fontSize: 38,

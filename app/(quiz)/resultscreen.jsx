@@ -9,7 +9,7 @@ import { useQuiz } from '../../contexts/QuizContext';
 const ResultScreen = () => {
   const { score } = useLocalSearchParams();
   const router = useRouter();
-  const passThreshold = 8; // Set passing score
+  const passThreshold = 8;
   const { resetQuiz } = useQuiz();
   const confettiRef = useRef(null);
 
@@ -30,7 +30,7 @@ const ResultScreen = () => {
         origin={{ x: screenWidth / 2, y: 0 }}
         fadeOut
         explosionSpeed={500}
-        // Customize other properties as needed
+        fallSpeed={2000}
       />
       <Text
         style={[

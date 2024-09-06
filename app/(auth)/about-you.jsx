@@ -63,8 +63,8 @@ const aboutYou = () => {
         <CustomButton
           title="Continue"
           handlePress={handleContinue}
+          style={{ opacity: isFormComplete ? 1 : 0.5 }} // Optional: change button style if disabled
           disabled={!isFormComplete} // Disable button if form is incomplete
-          style={!isFormComplete ? styles.disabledButton : styles.enabledButton} // Add custom styles based on completion
         />
         <Text style={styles.bottomtext}>
           Already have an account?{' '}
@@ -106,12 +106,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     margin: 15,
     gap: 50,
-  },
-  disabledButton: {
-    backgroundColor: 'gray',
-  },
-  enabledButton: {
-    backgroundColor: 'rgb(31, 73, 133)',
   },
 });
 

@@ -14,6 +14,7 @@ const work = () => {
   const [countries, setCountries] = useState([]);
   const [companies, setCompanies] = useState([]);
   const [branches, setBranches] = useState([]);
+  const [isFormComplete, setIsFormComplete] = useState(false);
 
   const router = useRouter();
 
@@ -37,11 +38,26 @@ const work = () => {
       .catch(error => console.error('Error fetching branches:', error));
   }, []);
 
+  useEffect(() => {
+    const { country, company, branch } = form;
+    setIsFormComplete(!!country && !!company && !!branch);
+  }, [form]);
+
   const handleSelect = (category, value) => {
     setForm((prevForm) => ({
       ...prevForm,
       [category]: value,
     }));
+  };
+
+  const handleContinue = () => {
+    if (isFormComplete) {
+      // Pass form data to the next page
+      router.replace('/password', { state: { formData: form } });
+    } else {
+      // Optionally, show an error message or alert
+      console.log('Please fill out all fields');
+    }
   };
 
   return (
@@ -71,10 +87,9 @@ const work = () => {
       <View style={styles.signin}>
         <CustomButton 
           title="Continue"
-          handlePress={() => {
-            console.log('Form Data:', form);
-            router.replace('/password');
-          }}
+          handlePress={handleContinue}
+          style={{ opacity: isFormComplete ? 1 : 0.5 }} // Optional: change button style if disabled
+          disabled={!isFormComplete} // Disable button if form is incomplete
         />
       </View>
     </SafeAreaView>

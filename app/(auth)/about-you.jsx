@@ -6,25 +6,18 @@ import FormField from '../../components/FormField';
 import DateField from '../../components/DateField';
 import CustomButton from '../../components/CustomButton';
 
-const aboutYou = () => {
-  const [form, setForm] = useState({
-    name: '',
-    surname: '',
-    email: '',
-    DOB: '',
-  });
+import { useFormContext } from '../../contexts/FormContext';
 
-  // Check if all fields are filled
+const aboutYou = () => {
+  const { formData, setFormData } = useFormContext();
+  const [form, setForm] = useState(formData);
+
   const isFormComplete = form.name && form.surname && form.email && form.DOB;
 
-  // Handle the continue button press
   const handleContinue = () => {
     if (isFormComplete) {
-      // Pass form data to the next screen (work page)
-      router.push({
-        pathname: '/work',
-        params: { formData: JSON.stringify(form) },
-      });
+      setFormData({ ...formData, ...form });
+      router.push('/work');
     }
   };
 
@@ -63,15 +56,9 @@ const aboutYou = () => {
         <CustomButton
           title="Continue"
           handlePress={handleContinue}
-          style={{ opacity: isFormComplete ? 1 : 0.5 }} // Optional: change button style if disabled
-          disabled={!isFormComplete} // Disable button if form is incomplete
+          style={{ opacity: isFormComplete ? 1 : 0.5 }}
+          disabled={!isFormComplete}
         />
-        <Text style={styles.bottomtext}>
-          Already have an account?{' '}
-          <Text style={styles.link} onPress={() => router.push('/sign-in')}>
-            Sign In
-          </Text>
-        </Text>
       </View>
     </SafeAreaView>
   );

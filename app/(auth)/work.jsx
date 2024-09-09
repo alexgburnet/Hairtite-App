@@ -1,14 +1,17 @@
 import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import CustomButton from '../../components/CustomButton';
 import CustomDropdown from '../../components/CustomDropdown';
 
+import { useFormContext } from '../../contexts/FormContext';
+
 const work = () => {
+  const { formData, setFormData } = useFormContext();
   const [form, setForm] = useState({
-    country: '',
-    company: '',
-    branch: '',
+    country: formData.country || '',
+    company: formData.company || '',
+    branch: formData.branch || '',
   });
 
   const [countries, setCountries] = useState([]);
@@ -39,6 +42,15 @@ const work = () => {
   }, []);
 
   useEffect(() => {
+    // Extract data from router state
+    const { state } = router;
+    if (state?.formData) {
+      console.log('Form data recieved:', state.formData);
+      //setForm(state.formData);
+    }
+  }, [router]);
+
+  useEffect(() => {
     const { country, company, branch } = form;
     setIsFormComplete(!!country && !!company && !!branch);
   }, [form]);
@@ -52,10 +64,9 @@ const work = () => {
 
   const handleContinue = () => {
     if (isFormComplete) {
-      // Pass form data to the next page
-      router.replace('/password', { state: { formData: form } });
+      setFormData({ ...formData, ...form });
+      router.replace('/password');
     } else {
-      // Optionally, show an error message or alert
       console.log('Please fill out all fields');
     }
   };

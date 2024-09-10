@@ -5,6 +5,8 @@ import { useFormContext } from '../../contexts/FormContext'; // Adjust the path 
 import FormField from '../../components/FormField';
 import CustomButton from '../../components/CustomButton';
 
+import { router } from 'expo-router';
+
 /**
  * Screen for the user to input their password for their account
  * 
@@ -23,7 +25,9 @@ const Password = () => {
   }
 
   const handleRegister = async () => {
-    const { password, confirmPassword } = form;
+    const { password } = form;
+  
+    console.log('Form data:', formData);
   
     // Check if passwords match
     if (!doPasswordsMatch()) {
@@ -50,14 +54,37 @@ const Password = () => {
         password,
       });
   
-      if (response.data.message === 'New staff created') {
+      console.log('Response:', response.data);
+  
+      // Check if registration was successful
+      if (response.status === 201) {
+        // Registration successful
         router.replace('/request-sent');
       } else {
-        Alert.alert('Error', response.data.message);
+        // If the API returns a different status code
+        Alert.alert('Error', response.data.message || 'Registration failed.');
       }
     } catch (error) {
+      // Handle specific HTTP errors
+      if (error.response) {
+        const { status, data } = error.response;
+        if (status === 400) {
+          Alert.alert('Error', 'Missing data. Please fill in all fields.');
+        } else if (status === 409) {
+          Alert.alert('Error', 'A user with this email already exists.');
+        } else if (status === 404) {
+          Alert.alert('Error', 'Store not found. Please check your entries.');
+        } else if (status === 500) {
+          Alert.alert('Error', 'Server error. Please try again later.');
+        } else {
+          Alert.alert('Error', data.message || 'An unknown error occurred.');
+        }
+      } else {
+        // Handle errors not related to HTTP (e.g., network issues)
+        Alert.alert('Registration failed', 'Please check your connection and try again.');
+      }
+  
       console.error('Error registering:', error);
-      Alert.alert('Registration failed', 'Please try again.');
     }
   };
 

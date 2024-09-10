@@ -39,6 +39,12 @@ const work = () => {
 
   useEffect(() => {
     // Fetch companies from backend
+
+    // Dont get list if country has been reset/empty
+    if (selectedCountry === '' || selectedCountry === null) {
+      return;
+    }
+
     axios.get('http://127.0.0.1:5000/api/companies', {
       params: {
         country: selectedCountry,
@@ -50,6 +56,12 @@ const work = () => {
 
   useEffect(() => {
     // Fetch branches from backend
+
+    // Dont get list if company has been reset/empty
+    if (selectedCompany === '' || selectedCompany === null) {
+      return;
+    }
+
     axios.get('http://127.0.0.1:5000/api/branches', {
       params: {
         country: selectedCountry,
@@ -58,7 +70,7 @@ const work = () => {
     })
       .then(response => setBranches(response.data))
       .catch(error => console.error('Error fetching branches:', error));
-  }, [selectedCompany, selectedCountry]);
+  }, [selectedCompany]);
 
   useEffect(() => {
     // Extract data from router state

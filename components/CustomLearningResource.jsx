@@ -2,6 +2,10 @@ import { View, Pressable, Text, StyleSheet, Image } from 'react-native';
 import React from 'react';
 
 const CustomLearningResource = ({ title, description, imageURL, onPress }) => {
+  // Split the description by newlines
+  const descriptionLines = description.split('\\n');
+  console.log(descriptionLines);
+
   return (
     <Pressable
       style={({ pressed }) => [
@@ -16,7 +20,11 @@ const CustomLearningResource = ({ title, description, imageURL, onPress }) => {
           source={{ uri: imageURL }}
           style={styles.image}
         />
-        <Text style={styles.description}>{description}</Text>
+        <View style={styles.textContainer}>
+          {descriptionLines.map((line, index) => (
+            <Text key={index} style={styles.description}>{line}</Text>
+          ))}
+        </View>
       </View>
     </Pressable>
   );
@@ -54,8 +62,8 @@ const styles = StyleSheet.create({
   textContainer: {
     flex: 3,
     justifyContent: 'center',
-    alignItems: 'center',
-    gap: 10,
+    alignItems: 'flex-start', // Align text to the start
+    gap: 5,
   },
   title: {
     fontSize: 18,
@@ -63,9 +71,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
   },
   description: {
-    flex: 3,
     fontSize: 12,
-    textAlign: 'justify',
+    textAlign: 'left', // Change to left for proper multiline display
     fontFamily: 'Poppins-Light',
   },
 });

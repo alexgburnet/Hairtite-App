@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import CustomButton from '../../components/CustomButton';
 import CustomDropdown from '../../components/CustomDropdown';
+import axios from 'axios'
 
 import { useFormContext } from '../../contexts/FormContext';
 
@@ -14,32 +15,50 @@ const work = () => {
     branch: formData.branch || '',
   });
 
+  const [selectedCountry, setSelectedCountry] = useState('');
+  const [selectedCompany, setSelectedCompany] = useState('');
+  const [selectedBranch, setSelectedBranch] = useState('');
+
   const [countries, setCountries] = useState([]);
   const [companies, setCompanies] = useState([]);
   const [branches, setBranches] = useState([]);
   const [isFormComplete, setIsFormComplete] = useState(false);
 
+  const [isCountrySelected, setIsCountrySelected] = useState(false);
+  const [isCompanySelected, setIsCompanySelected] = useState(false);
+  const [isBranchSelected, setIsBranchSelected] = useState(false);
+
   const router = useRouter();
 
   useEffect(() => {
     // Fetch countries from backend
-    fetch('http://127.0.0.1:5000/api/countries')
-      .then(response => response.json())
-      .then(data => setCountries(data))
+    axios.get('http://127.0.0.1:5000/api/countries')
+      .then(response => setCountries(response.data))
       .catch(error => console.error('Error fetching countries:', error));
-
-    // Fetch companies from backend
-    fetch('http://127.0.0.1:5000/api/companies')
-      .then(response => response.json())
-      .then(data => setCompanies(data))
-      .catch(error => console.error('Error fetching companies:', error));
-
-    // Fetch branches from backend
-    fetch('http://127.0.0.1:5000/api/branches')
-      .then(response => response.json())
-      .then(data => setBranches(data))
-      .catch(error => console.error('Error fetching branches:', error));
   }, []);
+
+  useEffect(() => {
+    // Fetch companies from backend
+    axios.get('http://127.0.0.1:5000/api/companies', {
+      params: {
+        country: selectedCountry,
+      }
+    })
+      .then(response => setCompanies(response.data))
+      .catch(error => console.error('Error fetching companies:', error));
+  }, [selectedCountry]);
+
+  useEffect(() => {
+    // Fetch branches from backend
+    axios.get('http://127.0.0.1:5000/api/branches', {
+      params: {
+        country: selectedCountry,
+        company: selectedCompany,
+      }
+    })
+      .then(response => setBranches(response.data))
+      .catch(error => console.error('Error fetching branches:', error));
+  }, [selectedCompany, selectedCountry]);
 
   useEffect(() => {
     // Extract data from router state
@@ -62,6 +81,42 @@ const work = () => {
     }));
   };
 
+  handleCountrySelect = (value) => {
+    setSelectedCountry(value);
+    handleSelect('country', value);
+    setIsCountrySelected(true);
+
+    // reset values for company and branch
+
+    setSelectedCompany('');
+    handleSelect('company', '');
+    setIsCompanySelected(false);
+
+    setSelectedBranch('');
+    handleSelect('branch', '');
+    setIsBranchSelected(false);
+  }
+
+
+  handleCompanySelect = (value) => {
+    setSelectedCompany(value);
+    handleSelect('company', value);
+    setIsCompanySelected(true);
+
+    // reset values for branch
+
+    setSelectedBranch('');
+    handleSelect('branch', '');
+    setIsBranchSelected(false);
+  }
+
+
+  handleBranchSelect = (value) => {
+    setSelectedBranch(value);
+    handleSelect('branch', value);
+    setIsBranchSelected(true);
+  }
+
   const handleContinue = () => {
     if (isFormComplete) {
       setFormData({ ...formData, ...form });
@@ -79,19 +134,24 @@ const work = () => {
         <CustomDropdown
           category="Country"
           data={countries.map(country => ({ label: country, value: country }))}
-          onSelect={(value) => handleSelect('country', value)}
+          value={selectedCountry}
+          onSelect={(value) => handleCountrySelect(value)}
         />
 
         <CustomDropdown
           category="Company"
           data={companies.map(company => ({ label: company, value: company }))}
-          onSelect={(value) => handleSelect('company', value)}
+          value={selectedCompany}
+          onSelect={(value) => handleCompanySelect(value)}
+          disabled={!isCountrySelected}
         />
 
         <CustomDropdown
           category="Branch"
           data={branches.map(branch => ({ label: branch, value: branch }))}
-          onSelect={(value) => handleSelect('branch', value)}
+          value={selectedBranch}
+          onSelect={(value) => handleBranchSelect(value)}
+          disabled={!isCompanySelected}
         />
       </View>
 

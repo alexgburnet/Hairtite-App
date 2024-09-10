@@ -2,15 +2,18 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import React, { useState } from 'react';
 
-const CustomDropdown = ({ category, data, onSelect }) => {
-  const [value, setValue] = useState(null);
+const CustomDropdown = ({ category, data, value, onSelect, disabled }) => {
   const [isFocus, setIsFocus] = useState(false);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{category}</Text>
       <Dropdown
-        style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+        style={[
+          styles.dropdown,
+          isFocus && { borderColor: 'rgb(31,73,133)' },
+          disabled && { opacity: 0.5 }  // Reduce opacity if disabled
+        ]}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
@@ -20,16 +23,18 @@ const CustomDropdown = ({ category, data, onSelect }) => {
         valueField="value"
         placeholder={!isFocus ? `Select ${category}` : '...'}
         searchPlaceholder="Search..."
-        value={value}
+        value={value}  // Use the value passed from the parent component
         search
         maxHeight={300}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         onChange={item => {
-          setValue(item.value); // Update the selected value
-          setIsFocus(false);    // Close the dropdown
-          onSelect(item.value); // Trigger the onSelect callback with the selected value
+          if (!disabled) {  // Only select if not disabled
+            onSelect(item.value); // Trigger the onSelect callback with the selected value
+            setIsFocus(false);    // Close the dropdown
+          }
         }}
+        disable={disabled}  // Correctly set disable prop
       />
     </View>
   );

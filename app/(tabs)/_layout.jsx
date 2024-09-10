@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View, Button, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Alert, Image } from 'react-native';
 import { Tabs } from 'expo-router';
 import { AntDesign } from '@expo/vector-icons';
 import * as SecureStore from 'expo-secure-store';
@@ -10,10 +10,24 @@ const TabsLayout = () => {
 
   const handleLogout = async () => {
     // Clear tokens or handle logout logic
+
+    Alert.alert('Are you sure you want to log out?', '', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Log Out',
+        onPress: () => logout(),
+      },
+    ]);
+  };
+
+  const logout = async () => {
     await SecureStore.deleteItemAsync('access_token');
     await SecureStore.deleteItemAsync('refresh_token');
     router.back(); // Navigate to index or login screen
-  };
+  }
 
   return (
     <Tabs
@@ -44,7 +58,9 @@ const TabsLayout = () => {
           ),
           headerLeft: () => (
             <View style={styles.headerLeft}>
-              <Button title="Log Out" onPress={handleLogout} />
+              <TouchableOpacity onPress={handleLogout}>
+                <AntDesign name="logout" size={24} color="black" style={{marginLeft: 15}} />
+              </TouchableOpacity>
             </View>
           ),
           tabBarIcon: ({ focused }) => (
@@ -70,11 +86,6 @@ const TabsLayout = () => {
               style={{ width: 200, height: 40, margin: 10 }}
               resizeMode="contain"
             />
-          ),
-          headerLeft: () => (
-            <View style={styles.headerLeft}>
-              <Button title="Log Out" onPress={handleLogout} />
-            </View>
           ),
           tabBarIcon: ({ focused }) => (
             <AntDesign

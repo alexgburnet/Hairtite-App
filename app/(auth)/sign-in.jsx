@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, SafeAreaView, Alert, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { Link, router } from 'expo-router'
 import axios from 'axios'
@@ -17,7 +17,7 @@ const signIn = () => {
     email: '',
     password: '',
   })
-  const [error, setError] = useState('')  // State to handle error messages
+  const [errorMessage, setErrorMessage] = useState('')  // State to handle error messages
 
   const handleSignIn = async () => {
     try {
@@ -35,14 +35,15 @@ const signIn = () => {
       // Handle error from the Flask API
       if (error.response) {
         // The request was made and the server responded with a status code
-        setError(error.response.data.message || 'An error occurred');
+        setErrorMessage(error.response.data.message || 'An error occurred');
       } else if (error.request) {
         // The request was made but no response was received
-        setError('No response from server');
+        setErrorMessage('No response from server');
       } else {
         // Something happened in setting up the request
-        setError('Error setting up request');
+        setErrorMessage('Error setting up request');
       }
+      Alert.alert('Error', errorMessage);
     }
   }
 
@@ -64,9 +65,6 @@ const signIn = () => {
           secureTextEntry
         />
       </View>
-
-      {/* Display error message if any */}
-      {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
       <View style={styles.signin}>
         <CustomButton 

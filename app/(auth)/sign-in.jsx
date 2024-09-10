@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { Link, router } from 'expo-router'
 import axios from 'axios'
 
+import * as SecureStore from 'expo-secure-store';
+
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
 
@@ -29,6 +31,9 @@ const signIn = () => {
 
       // Handle successful sign-in
       if (response.status === 200) {
+        // Store tokens in SecureStore
+        await SecureStore.setItemAsync('access_token', response.data.access_token);
+        await SecureStore.setItemAsync('refresh_token', response.data.access_token);
         router.replace('/home');  // Navigate to home page
       }
     } catch (error) {

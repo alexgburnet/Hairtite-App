@@ -1,83 +1,35 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 import { useQuiz } from '../../contexts/QuizContext';
 import { useRouter } from 'expo-router';
 import { AntDesign } from '@expo/vector-icons';
-
 import CustomButton from '../../components/CustomButton';
-
-const questions = [
-  {
-    question: "During an average of 8 hour-shift we average human beings naturally shed 40 – 130 hairs every day.",
-    answer: true,
-    info: "An average of 40 -130 hair-shafts will be lost to natural cyclical processes per day.",
-    followup: "The average human sheds up to 130 hairs naturally every day.",
-    fanswer: true,
-  },
-  {
-    question: "Modern styling & hair-care practices damages hair",
-    answer: true,
-    info: "A) Excessive heat - higher temperature from / of hair driers / styling tongues/straighteners\n\nB) Perm solutions, dyes / straightening chemicals – Trichologists believe",
-    followup: "Using hot tools like dryers or straighteners and chemicals like perm solutions impacts hair contamination.",
-    fanswer: true,
-  },
-  {
-    question: "Washing and combing removes all residual hair?",
-    answer: false,
-    info: "",
-    followup: "Daily combed hair, well-groomed beard, neatly trimmed brows and daily showering prevent removal of all loose hairs.",
-    fanswer: false,
-  },
-  {
-    question: "Digested hair contained within foods will make you physically sick?",
-    answer: false,
-    info: "Hair is protein and can be digested!",
-    followup: "If you eat hair, you're likely to be sick",
-    fanswer: false,
-  },
-  {
-    question: "digested hair contained within foods is likely to make you feel sick",
-    answer: true,
-    info: "In most people the thought makes people feel sick – can and in most people does trigger an emotional reaction \n\nMost people will stop eating and it will kill their appetite – AND they will stop eating",
-    followup: "If you find hair in your meal, even if you don’t eat it you might feel sick.",
-    fanswer: true,
-  },
-  {
-    question: "Contact with the head can cause food poisoning?",
-    answer: true,
-    info: "All people – with good hygiene – sweaty areas of skin such as the scalp contain food poisoning pathogen Staphylocci Aureus. If you touch your hand and then food – whether your hand is gloved or not – you can transfer food poisoning pathogens to the food you serve to your customers. – it’s a fact!",
-    followup: "If I scratch my head, it is possible I can cause food poisoning?",
-    fanswer: true,
-  },
-  {
-    question: "Your actions help prevent food poisoning?",
-    answer: true,
-    info: "",
-    followup: "How I work helps prevent food poisoning.",
-    fanswer: true,
-  },
-  {
-    question: "Short hair poses a greater risk of contamination?",
-    answer: true,
-    info: "Short hair is more likely to stand upright and protrude through gaps including needle holes in all knitted, woven particularly non-woven fabrics.\n\nShort hair is less easily seen than long hair and therefore, may fall into food unseen and when eating food seen as the food is closer to the eyes and mouth.",
-    followup: "short hair has a greater risk of contamination than long hair?",
-    fanswer: true,
-  },
-  
-];
-
-/**
- * Screen for the quiz questions
- * If the user answers correctly, the user will be shown a correct message and the next question
- * If the user answers incorrectly, the user will be shown a follow-up question
- * 
- * @returns {ReactElement} The quiz screen
-*/
+import axios from 'axios';
+import { SERVER_URL } from '../../config';
 
 const QuizScreen = () => {
   const { currentQuestionIndex, score, incrementScore, nextQuestion } = useQuiz();
   const router = useRouter();
-  const [showCorrectMessage, setShowCorrectMessage] = React.useState(false);
+  const [showCorrectMessage, setShowCorrectMessage] = useState(false);
+  const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(true); // New loading state
+  const [questionLength, setQuestionLength] = useState(0);
+
+  useEffect(() => {
+    const getQuestions = async () => {
+      try {
+        const response = await axios.get(`${SERVER_URL}/api/questions`);
+        setQuestions(response.data);
+        setQuestionLength(response.data.length);
+        setLoading(false); // Set loading to false once questions are fetched
+      } catch (error) {
+        Alert.alert('Error fetching questions, check your network connection');
+        router.back();
+      }
+    };
+
+    getQuestions();
+  }, []);
 
   const handleAnswer = (answer) => {
     const currentQuestion = questions[currentQuestionIndex];
@@ -101,7 +53,16 @@ const QuizScreen = () => {
     }
   };
 
-  if (currentQuestionIndex >= questions.length) {
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="rgb(31,73,133)" />
+        <Text>Loading questions...</Text>
+      </View>
+    );
+  }
+
+  if (currentQuestionIndex >= questionLength) {
     router.replace(`/resultscreen?score=${score}`);
     return null;
   }
@@ -143,6 +104,12 @@ const QuizScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f4f4f4',
+  },
   questionContainer: {
     flex: 1,
     justifyContent: 'space-between',

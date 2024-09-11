@@ -2,6 +2,26 @@
 
 This is an Expo react-native front-end project for quizing staff engagement for hair containment
 
+## Version 2.0 (Initial backend implemented)
+
+### Backend Implementation:
+[Link to backend here](https://github.com/alexgburnet/Hairtite-App-Backend)
+
+### Using JWT tokens for secure login
+
+- JWT tokens are stored using SecureStore. Each user has two tokens at any one time: an access token and a refresh token.
+- On startup, if the user has a valid JWT, they will be immediately redirected to the home page.
+- To log out there is a clickable icon in the top left of the header.
+
+### Showing previous results on the home page
+
+- The last 6 results are shown on the home page to show the user's progress.
+- If the number of tests the user has taken is less than 6, the results are padded with 0's
+
+### Using database to store resources and questions
+
+- The database now stores all learning resources and questions in the database, meaning they can be changed without the app needing to be updated.
+
 ## Version 1.1.1 (no back end implemented yet)
 
 ### Clickable Link to Youtube Shorts for learning resources

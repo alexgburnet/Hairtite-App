@@ -50,6 +50,10 @@ const home = () => {
             const labels = responseData.map(item => item.date);
             const data = responseData.map(item => item.score);
 
+            // reverse the data so that the most recent data is at the front
+            data.reverse();
+            labels.reverse();
+
             // If data is empty, set empty data
             if (data.length === 0) {
                 setScoreData({

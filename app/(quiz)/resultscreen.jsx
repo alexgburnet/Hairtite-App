@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState, Alert } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import ConfettiCannon from 'react-native-confetti-cannon';
@@ -6,15 +6,67 @@ import ConfettiCannon from 'react-native-confetti-cannon';
 import CustomButton from '../../components/CustomButton';
 import { useQuiz } from '../../contexts/QuizContext';
 
+import * as SecureStore from 'expo-secure-store';
+import { jwtDecode } from 'jwt-decode';
+
+import axios from 'axios';
+
 const ResultScreen = () => {
-  const { score } = useLocalSearchParams();
   const router = useRouter();
   const passThreshold = 8;
-  const { resetQuiz } = useQuiz();
+  const { resetQuiz, score } = useQuiz();
   const confettiRef = useRef(null);
+  const [loading, setLoading] = useState(true);
+  const [staffID, setStaffID] = useState(null);
+
+  // get staff ID
+  useEffect(() => {
+    const getStaffID = async () => {
+      try {
+        const accessToken = await SecureStore.getItemAsync('access_token');
+
+        if (!accessToken) {
+          Alert.alert('No access token found, please log out and log back in');
+        }
+
+        const decodedToken = jwtDecode(accessToken);
+        setStaffID(decodedToken.staff_id);
+      } catch (error) {
+        Alert.alert('Error with your jwt token, please log out and log back in');
+      }
+    };
+
+    getStaffID();
+  }, []);
+
+  // send score to backend when id is loaded
+  useEffect(() => {
+    const sendScore = async () => {
+      try {
+        const response = await axios.post('http://127.0.0.1:5000/add-score', {
+          staff_id: staffID,
+          score,
+        });
+
+        if (response.status === 201) {
+          console.log('Score sent successfully');
+        } else {
+          Alert.alert('Error sending score, please try again');
+        }
+      } catch (error) {
+        Alert.alert('Error sending score, please try again');
+      }
+    };
+
+    if (staffID) {
+      sendScore();
+    }
+
+  }, [staffID, score]);
+
 
   // Trigger confetti if the user passes
-  React.useEffect(() => {
+  useEffect(() => {
     if (parseInt(score) >= passThreshold && confettiRef.current) {
       confettiRef.current.start();
     }

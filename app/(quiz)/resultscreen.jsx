@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState, Alert } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
-import ConfettiCannon from 'react-native-confetti-cannon';
 
 import CustomButton from '../../components/CustomButton';
 import { useQuiz } from '../../contexts/QuizContext';
@@ -15,7 +14,7 @@ import axios from 'axios';
 
 const ResultScreen = () => {
   const router = useRouter();
-  const passThreshold = 8;
+  const passThreshold = 90;
   const { resetQuiz, score } = useQuiz();
   const confettiRef = useRef(null);
   const [staffID, setStaffID] = useState(null);
@@ -66,37 +65,20 @@ const ResultScreen = () => {
 
   }, [staffID, score]);
 
-
-  // Trigger confetti if the user passes
-  useEffect(() => {
-    if (parseInt(score) >= passThreshold && confettiRef.current) {
-      confettiRef.current.start();
-    }
-  }, [score, passThreshold]);
-
-  const screenWidth = Dimensions.get('window').width;
-
   return (
     <View style={styles.container}>
-      <ConfettiCannon
-        ref={confettiRef}
-        count={400}
-        origin={{ x: screenWidth / 2, y: 0 }}
-        fadeOut
-        explosionSpeed={500}
-        fallSpeed={2000}
-      />
+      
       <Text
         style={[
           styles.resultText,
-          parseInt(score) >= passThreshold ? styles.passText : styles.failText,
+          percentScore >= passThreshold ? styles.passText : styles.failText,
         ]}
       >
-        {parseInt(score) >= passThreshold ? "Congratulations! You Passed!" : "Sorry, you didn't meet the pass mark"}
+        {percentScore >= passThreshold ? "Congratulations! You Passed!" : "Sorry, you didn't meet the pass mark"}
       </Text>
-      <Text style={styles.scoreText}>Your Score: {score} / {passThreshold}</Text>
+      <Text style={styles.scoreText}>Your Score: {percentScore} %</Text>
       
-      {parseInt(score) < passThreshold && (
+      {percentScore < passThreshold && (
         <Text style={styles.referencetext}>
           Reference our learning resources and try again!
         </Text>

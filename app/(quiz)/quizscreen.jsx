@@ -12,8 +12,9 @@ const QuizScreen = () => {
   const router = useRouter();
   const [showCorrectMessage, setShowCorrectMessage] = useState(false);
   const [questions, setQuestions] = useState([]);
-  const [loading, setLoading] = useState(true); // New loading state
+  const [loading, setLoading] = useState(true);
   const [questionLength, setQuestionLength] = useState(0);
+  const [hasNavigated, setHasNavigated] = useState(false);
 
   useEffect(() => {
     const getQuestions = async () => {
@@ -21,7 +22,7 @@ const QuizScreen = () => {
         const response = await axios.get(`${SERVER_URL}/api/questions`);
         setQuestions(response.data);
         setQuestionLength(response.data.length);
-        setLoading(false); // Set loading to false once questions are fetched
+        setLoading(false);
       } catch (error) {
         Alert.alert('Error fetching questions, check your network connection');
         router.back();
@@ -30,6 +31,15 @@ const QuizScreen = () => {
 
     getQuestions();
   }, []);
+
+  useEffect(() => {
+    if (!loading && currentQuestionIndex >= questionLength && !hasNavigated) {
+      // get integer percentage score
+      const percentScore = Math.round((score / questionLength) * 100);
+      router.replace(`/resultscreen?percentScore=${percentScore}`);
+      setHasNavigated(true);
+    }
+  }, [loading, currentQuestionIndex, questionLength, score, hasNavigated, router]);
 
   const handleAnswer = (answer) => {
     const currentQuestion = questions[currentQuestionIndex];
@@ -62,13 +72,6 @@ const QuizScreen = () => {
     );
   }
 
-  if (currentQuestionIndex >= questionLength) {
-    // get integer percentage score
-    const percentScore = Math.round((score / questionLength) * 100);
-    router.replace(`/resultscreen?percentScore=${percentScore}`);
-    return null;
-  }
-
   return (
     <View style={showCorrectMessage ? styles.messageContainer : styles.questionContainer}>
       {showCorrectMessage ? (
@@ -79,14 +82,14 @@ const QuizScreen = () => {
         </View>
       ) : (
         <>
-        <View style={styles.questionBoxContainer}>
-          <View style={styles.questionBox}>
-            <Text style={styles.questionNumber}>Question {currentQuestionIndex + 1}</Text>
-            <View style={styles.questionTextContainer}>
-              <Text style={styles.questionText}>{questions[currentQuestionIndex]?.question}</Text>
+          <View style={styles.questionBoxContainer}>
+            <View style={styles.questionBox}>
+              <Text style={styles.questionNumber}>Question {currentQuestionIndex + 1}</Text>
+              <View style={styles.questionTextContainer}>
+                <Text style={styles.questionText}>{questions[currentQuestionIndex]?.question}</Text>
+              </View>
             </View>
           </View>
-        </View>
           <View style={styles.buttonContainer}>
             <CustomButton
               style={styles.yesButton}

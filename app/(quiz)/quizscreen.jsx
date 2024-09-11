@@ -63,7 +63,9 @@ const QuizScreen = () => {
   }
 
   if (currentQuestionIndex >= questionLength) {
-    router.replace(`/resultscreen?score=${score}`);
+    // get integer percentage score
+    const percentScore = Math.round((score / questionLength) * 100);
+    router.replace(`/resultscreen?percentScore=${percentScore}`);
     return null;
   }
 

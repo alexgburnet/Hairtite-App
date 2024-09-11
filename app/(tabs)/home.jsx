@@ -1,9 +1,18 @@
 import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { router } from 'expo-router'
 
 import CustomLineChart from '../../components/CustomLineChart';
 import CustomButton from '../../components/CustomButton'
+
+import { useQuiz } from '../../contexts/QuizContext';
+
+import * as SecureStore from 'expo-secure-store';
+import { jwtDecode } from 'jwt-decode';
+
+import axios from 'axios';
+
+import { SERVER_URL } from '../../config';
 
 const data = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June'],
@@ -15,6 +24,67 @@ const data = {
 const home = () => {
 
   const [width, setChartWidth] = useState(0)
+  const [scoreData, setScoreData] = useState(data)
+  const [staffID, setStaffID] = useState(null)
+
+  const { quizLastCompleted } = useQuiz();
+
+  useEffect(() => {
+    const getScoreData = async () => {
+        try {
+            const accessToken = await SecureStore.getItemAsync('access_token');
+
+            if (!accessToken) {
+                Alert.alert('No access token found, please log out and log back in');
+                return;
+            }
+
+            const decodedToken = jwtDecode(accessToken);
+
+            const response = await axios.post(`${SERVER_URL}/api/get-scores`, {
+                staff_id: decodedToken.staff_id
+            });
+
+            // Transform the response data
+            const responseData = response.data;
+            const labels = responseData.map(item => item.date);
+            const data = responseData.map(item => item.score);
+
+            // If data is empty, set empty data
+            if (data.length === 0) {
+                setScoreData({
+                    labels: ['', '', '', '', '', ''],
+                    datasets: [{
+                        data: [ 0, 0, 0, 0, 0, 0 ],
+                    }]
+                });
+                return;
+            }
+
+            // if data length is less than 6, pad with 0s
+            if (data.length < 6) {
+                const diff = 6 - data.length;
+                for (let i = 0; i < diff; i++) {
+                    data.unshift(0);
+                    labels.unshift('');
+                }
+            }
+
+            const formattedData = {
+                labels: ['','','','','',''],
+                datasets: [{
+                    data: data
+                }]
+            };
+
+            setScoreData(formattedData);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    getScoreData();
+}, [quizLastCompleted]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -27,7 +97,7 @@ const home = () => {
         }}
       > 
         <Text style={styles.title}>Your Progress</Text>
-        <CustomLineChart data={data} width={width} height={175}/>
+        <CustomLineChart data={scoreData} width={width} height={175}/>
       </View>
 
       <View style={styles.textContainer}>

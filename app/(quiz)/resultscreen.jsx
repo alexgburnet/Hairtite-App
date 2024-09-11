@@ -18,8 +18,8 @@ const ResultScreen = () => {
   const passThreshold = 8;
   const { resetQuiz, score } = useQuiz();
   const confettiRef = useRef(null);
-  const [loading, setLoading] = useState(true);
   const [staffID, setStaffID] = useState(null);
+  const { percentScore } = useLocalSearchParams();
 
   // get staff ID
   useEffect(() => {
@@ -47,7 +47,7 @@ const ResultScreen = () => {
       try {
         const response = await axios.post(`${SERVER_URL}/add-score`, {
           staff_id: staffID,
-          score,
+          score: percentScore,
         });
 
         if (response.status === 201) {

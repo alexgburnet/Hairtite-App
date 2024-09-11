@@ -64,7 +64,7 @@ const work = () => {
       return;
     }
 
-    axios.get(`${SERVER_URL}/branches`, {
+    axios.get(`${SERVER_URL}/api/branches`, {
       params: {
         country: selectedCountry,
         company: selectedCompany,

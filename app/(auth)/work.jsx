@@ -7,6 +7,8 @@ import axios from 'axios'
 
 import { useFormContext } from '../../contexts/FormContext';
 
+import { SERVER_URL } from '../../config'
+
 const work = () => {
   const { formData, setFormData } = useFormContext();
   const [form, setForm] = useState({
@@ -32,7 +34,7 @@ const work = () => {
 
   useEffect(() => {
     // Fetch countries from backend
-    axios.get('http://127.0.0.1:5000/api/countries')
+    axios.get(`${SERVER_URL}/api/countries`)
       .then(response => setCountries(response.data))
       .catch(error => console.error('Error fetching countries:', error));
   }, []);
@@ -45,7 +47,7 @@ const work = () => {
       return;
     }
 
-    axios.get('http://127.0.0.1:5000/api/companies', {
+    axios.get(`${SERVER_URL}/api/companies`, {
       params: {
         country: selectedCountry,
       }
@@ -62,7 +64,7 @@ const work = () => {
       return;
     }
 
-    axios.get('http://127.0.0.1:5000/api/branches', {
+    axios.get(`${SERVER_URL}/branches`, {
       params: {
         country: selectedCountry,
         company: selectedCompany,

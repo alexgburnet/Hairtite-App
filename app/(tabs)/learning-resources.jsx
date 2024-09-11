@@ -5,13 +5,15 @@ import axios from 'axios';
 
 import CustomLearningResource from '../../components/CustomLearningResource';
 
+import { SERVER_URL } from '../../config'
+
 const LearningResources = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [currentUrl, setCurrentUrl] = useState('');
   const [resources, setResources] = useState([]);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:5000/api/learning-resources')
+    axios.get(`${SERVER_URL}/api/learning-resources`)
       .then(response => setResources(response.data))
       .catch(error => console.error('Error fetching learning resources:', error));
   }, []);

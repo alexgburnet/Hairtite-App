@@ -8,6 +8,8 @@ import * as SecureStore from 'expo-secure-store';
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
 
+import { SERVER_URL } from '../../config'
+
 /**
  * Screen to handle sign in
  * 
@@ -24,7 +26,7 @@ const signIn = () => {
   const handleSignIn = async () => {
     try {
       // Make a POST request to the Flask API
-      const response = await axios.post('http://127.0.0.1:5000/login', {
+      const response = await axios.post(`${SERVER_URL}/login`, {
         email: form.email,
         password: form.password
       });

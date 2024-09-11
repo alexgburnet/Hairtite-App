@@ -5,6 +5,8 @@ import * as SecureStore from 'expo-secure-store';
 import { jwtDecode } from 'jwt-decode';
 import CustomButton from '../components/CustomButton';
 
+import { SERVER_URL } from '../config';
+
 /**
  * Initial screen for the app
  */
@@ -30,7 +32,7 @@ const Index = () => {
           } else {
             // If access token is expired, try to refresh it
             if (refreshToken) {
-              const response = await fetch('https://your-flask-backend.com/refresh', {
+              const response = await fetch(`${SERVER_URL}/refresh`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',

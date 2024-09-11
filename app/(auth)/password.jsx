@@ -7,6 +7,8 @@ import CustomButton from '../../components/CustomButton';
 
 import { router } from 'expo-router';
 
+import { SERVER_URL } from '../../config'
+
 /**
  * Screen for the user to input their password for their account
  * 
@@ -37,7 +39,7 @@ const Password = () => {
   
     try {
       // Get store_id from the backend
-      const storeResponse = await axios.post('http://127.0.0.1:5000/get-store-id', {
+      const storeResponse = await axios.post(`${SERVER_URL}/get-store-id`, {
         country: formData.country,
         company: formData.company,
         branch: formData.branch,
@@ -46,7 +48,7 @@ const Password = () => {
       const { store_id } = storeResponse.data;
   
       // Submit all the collected data to the Flask API
-      const response = await axios.post('http://127.0.0.1:5000/signup', {
+      const response = await axios.post(`${SERVER_URL}/signup`, {
         full_name: `${formData.name} ${formData.surname}`,
         email: formData.email,
         birthday: formData.DOB,

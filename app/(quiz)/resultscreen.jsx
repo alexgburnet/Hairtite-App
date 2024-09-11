@@ -9,6 +9,8 @@ import { useQuiz } from '../../contexts/QuizContext';
 import * as SecureStore from 'expo-secure-store';
 import { jwtDecode } from 'jwt-decode';
 
+import { SERVER_URL } from '../../config'
+
 import axios from 'axios';
 
 const ResultScreen = () => {
@@ -43,7 +45,7 @@ const ResultScreen = () => {
   useEffect(() => {
     const sendScore = async () => {
       try {
-        const response = await axios.post('http://127.0.0.1:5000/add-score', {
+        const response = await axios.post(`${SERVER_URL}/add-score`, {
           staff_id: staffID,
           score,
         });

@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState, Alert } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
+import ConfettiCannon from 'react-native-confetti-cannon';
 
 import CustomButton from '../../components/CustomButton';
 import { useQuiz } from '../../contexts/QuizContext';
@@ -65,9 +66,29 @@ const ResultScreen = () => {
 
   }, [staffID, score]);
 
+
+  // Trigger confetti if the user passes
+  useEffect(() => {
+    console.log('percentScore', percentScore);
+    console.log('passThreshold', passThreshold);
+    if (percentScore >= passThreshold && confettiRef.current) {
+      confettiRef.current.start();
+    }
+  }, [percentScore, passThreshold]);
+
+  const screenWidth = Dimensions.get('window').width;
+
   return (
     <View style={styles.container}>
-      
+      <ConfettiCannon
+        ref={confettiRef}
+        count={400}
+        origin={{ x: screenWidth / 2, y: 0 }}
+        fadeOut
+        autoStart={false}
+        explosionSpeed={500}
+        fallSpeed={2000}
+      />
       <Text
         style={[
           styles.resultText,

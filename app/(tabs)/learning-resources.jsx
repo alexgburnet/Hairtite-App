@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, ScrollView, Text, StyleSheet, Modal, Button, SafeAreaView } from 'react-native';
 import { WebView } from 'react-native-webview';
+import axios from 'axios';
 
 import CustomLearningResource from '../../components/CustomLearningResource';
-import CustomButton from '../../components/CustomButton';
-import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
+
+import { SERVER_URL } from '../../config'
 
 const LearningResources = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [currentUrl, setCurrentUrl] = useState('');
+  const [resources, setResources] = useState([]);
 
-  const resources = [
-    {
-      title: 'Why is it so important?',
-      description: '- How do customers react to finding hair in their food?\n- How would you deal with it?\n- Watch this video to find out!',
-      imageURL: 'https://img.youtube.com/vi/2fs8kYYEGlI/default.jpg',
-      linkURL: 'https://youtube.com/shorts/2fs8kYYEGlI?feature=share',
-    },
-  ];
+  useEffect(() => {
+    axios.get(`${SERVER_URL}/api/learning-resources`)
+      .then(response => setResources(response.data))
+      .catch(error => console.error('Error fetching learning resources:', error));
+  }, []);
 
   const openLinkInModal = (url) => {
     setCurrentUrl(url);
@@ -41,9 +40,9 @@ const LearningResources = () => {
             key={index}
             title={resource.title}
             description={resource.description}
-            imageURL={getThumbnailUrl(resource.linkURL)}
-            linkURL={resource.linkURL}
-            onPress={() => openLinkInModal(resource.linkURL)}
+            imageURL={getThumbnailUrl(resource.url)}
+            linkURL={resource.url}
+            onPress={() => openLinkInModal(resource.url)}
           />
         ))}
       </ScrollView>

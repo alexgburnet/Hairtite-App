@@ -8,12 +8,14 @@ const QuizContext = createContext();
 export const QuizProvider = ({ children }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
+  const [quizLastCompleted, setQuizLastCompleted] = useState(null);
 
   const incrementScore = () => setScore(score + 1);
   const nextQuestion = () => setCurrentQuestionIndex(index => index + 1);
   const resetQuiz = () => {
     setCurrentQuestionIndex(0);
     setScore(0);
+    setQuizLastCompleted(new Date());
   };
 
   return (
@@ -21,6 +23,7 @@ export const QuizProvider = ({ children }) => {
       value={{
         currentQuestionIndex,
         score,
+        quizLastCompleted,
         incrementScore,
         nextQuestion,
         resetQuiz,

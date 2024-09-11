@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState, Alert } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import ConfettiCannon from 'react-native-confetti-cannon';
@@ -6,19 +6,75 @@ import ConfettiCannon from 'react-native-confetti-cannon';
 import CustomButton from '../../components/CustomButton';
 import { useQuiz } from '../../contexts/QuizContext';
 
+import * as SecureStore from 'expo-secure-store';
+import { jwtDecode } from 'jwt-decode';
+
+import { SERVER_URL } from '../../config'
+
+import axios from 'axios';
+
 const ResultScreen = () => {
-  const { score } = useLocalSearchParams();
   const router = useRouter();
-  const passThreshold = 8;
-  const { resetQuiz } = useQuiz();
+  const passThreshold = 90;
+  const { resetQuiz, score } = useQuiz();
   const confettiRef = useRef(null);
+  const [staffID, setStaffID] = useState(null);
+  const { percentScore } = useLocalSearchParams();
+
+  // get staff ID
+  useEffect(() => {
+    const getStaffID = async () => {
+      try {
+        const accessToken = await SecureStore.getItemAsync('access_token');
+
+        if (!accessToken) {
+          Alert.alert('No access token found, please log out and log back in');
+        }
+
+        const decodedToken = jwtDecode(accessToken);
+        setStaffID(decodedToken.staff_id);
+      } catch (error) {
+        Alert.alert('Error with your jwt token, please log out and log back in');
+      }
+    };
+
+    getStaffID();
+  }, []);
+
+  // send score to backend when id is loaded
+  useEffect(() => {
+    const sendScore = async () => {
+      try {
+        const response = await axios.post(`${SERVER_URL}/add-score`, {
+          staff_id: staffID,
+          score: percentScore,
+        });
+
+        if (response.status === 201) {
+          console.log('Score sent successfully');
+        } else {
+          Alert.alert('Error sending score, please try again');
+        }
+      } catch (error) {
+        Alert.alert('Error sending score, please try again');
+      }
+    };
+
+    if (staffID) {
+      sendScore();
+    }
+
+  }, [staffID, score]);
+
 
   // Trigger confetti if the user passes
-  React.useEffect(() => {
-    if (parseInt(score) >= passThreshold && confettiRef.current) {
+  useEffect(() => {
+    console.log('percentScore', percentScore);
+    console.log('passThreshold', passThreshold);
+    if (percentScore >= passThreshold && confettiRef.current) {
       confettiRef.current.start();
     }
-  }, [score, passThreshold]);
+  }, [percentScore, passThreshold]);
 
   const screenWidth = Dimensions.get('window').width;
 
@@ -29,20 +85,21 @@ const ResultScreen = () => {
         count={400}
         origin={{ x: screenWidth / 2, y: 0 }}
         fadeOut
+        autoStart={false}
         explosionSpeed={500}
         fallSpeed={2000}
       />
       <Text
         style={[
           styles.resultText,
-          parseInt(score) >= passThreshold ? styles.passText : styles.failText,
+          percentScore >= passThreshold ? styles.passText : styles.failText,
         ]}
       >
-        {parseInt(score) >= passThreshold ? "Congratulations! You Passed!" : "Sorry, you didn't meet the pass mark"}
+        {percentScore >= passThreshold ? "Congratulations! You Passed!" : "Sorry, you didn't meet the pass mark"}
       </Text>
-      <Text style={styles.scoreText}>Your Score: {score} / {passThreshold}</Text>
+      <Text style={styles.scoreText}>Your Score: {percentScore} %</Text>
       
-      {parseInt(score) < passThreshold && (
+      {percentScore < passThreshold && (
         <Text style={styles.referencetext}>
           Reference our learning resources and try again!
         </Text>

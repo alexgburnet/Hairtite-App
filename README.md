@@ -1,6 +1,14 @@
-# Hairtite retail app
+# Hairtite Retail App
 
-This is an Expo react-native front-end project for quizing staff engagement for hair containment
+Welcome to the Hairtite Retail App! This app helps users assess and improve their knowledge and usage of Hairtite's HACCP International Certified Hair Containment Devices.
+
+## Features
+
+- **User Registration & Authentication**: Secure sign-up and login with JWT authentication.
+- **Progress Tracking**: Visualize quiz scores over time with a line chart.
+- **Interactive Quiz**: Engage with quizzes to test and improve your knowledge.
+- **Form-Based Data Collection**: Collect user details, work information, and passwords through a series of forms.
+
 
 ## Version 2.0 (Initial backend implemented)
 
@@ -15,6 +23,7 @@ This is an Expo react-native front-end project for quizing staff engagement for 
 
 ### Showing previous results on the home page
 
+- When completing the quiz, the results are sent to the database
 - The last 6 results are shown on the home page to show the user's progress.
 - If the number of tests the user has taken is less than 6, the results are padded with 0's
 

@@ -15,7 +15,7 @@ import axios from 'axios';
 
 const ResultScreen = () => {
   const router = useRouter();
-  const passThreshold = 90;
+  const passThreshold = 100;
   const { resetQuiz, score } = useQuiz();
   const confettiRef = useRef(null);
   const [staffID, setStaffID] = useState(null);
@@ -69,8 +69,6 @@ const ResultScreen = () => {
 
   // Trigger confetti if the user passes
   useEffect(() => {
-    console.log('percentScore', percentScore);
-    console.log('passThreshold', passThreshold);
     if (percentScore >= passThreshold && confettiRef.current) {
       confettiRef.current.start();
     }

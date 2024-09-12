@@ -35,7 +35,8 @@ const signIn = () => {
       if (response.status === 200) {
         // Store tokens in SecureStore
         await SecureStore.setItemAsync('access_token', response.data.access_token);
-        await SecureStore.setItemAsync('refresh_token', response.data.access_token);
+        await SecureStore.setItemAsync('refresh_token', response.data.refresh_token);
+
         router.replace('/home');  // Navigate to home page
       }
     } catch (error) {

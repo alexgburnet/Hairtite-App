@@ -24,9 +24,13 @@ const DateField = ({ title, value, handleChangeDate }) => {
     };
     
     const handleConfirm = (date) => {
-        const formattedDate = date.toLocaleDateString();
-        handleChangeDate(formattedDate);
-        hideDatePicker();
+      const formattedDate = date.toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+    });
+    handleChangeDate(formattedDate);
+    hideDatePicker();
     };
 
     return (

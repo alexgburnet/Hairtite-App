@@ -3,13 +3,9 @@ import { View, Text, SafeAreaView, StyleSheet, Image } from 'react-native';
 import { router } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
 import { jwtDecode } from 'jwt-decode';
+import axios from 'axios';
 import CustomButton from '../components/CustomButton';
-
 import { SERVER_URL } from '../config';
-
-/**
- * Initial screen for the app
- */
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
@@ -32,21 +28,20 @@ const Index = () => {
           } else {
             // If access token is expired, try to refresh it
             if (refreshToken) {
-              const response = await fetch(`${SERVER_URL}/refresh`, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ refresh_token: refreshToken }),
+              console.log('Refreshing token...');
+              const response = await axios.post(`${SERVER_URL}/refresh`, {
+                refresh_token: refreshToken,
               });
 
-              if (response.ok) {
-                const data = await response.json();
-                await SecureStore.setItemAsync('access_token', data.access_token); // Store new access token
-                router.push('(tabs)');
+              if (response.status === 200) {
+                console.log('Token refreshed');
+                const { access_token } = response.data;
+                await SecureStore.setItemAsync('access_token', access_token); // Store new access token
+                router.push('/home');
                 return;
               } else {
                 // Clear tokens if refresh fails
+                console.log('Token refresh failed');
                 await SecureStore.deleteItemAsync('access_token');
                 await SecureStore.deleteItemAsync('refresh_token');
               }
@@ -55,6 +50,8 @@ const Index = () => {
         }
       } catch (error) {
         console.error('Error checking token validity:', error);
+        await SecureStore.deleteItemAsync('access_token');
+        await SecureStore.deleteItemAsync('refresh_token');
       } finally {
         setLoading(false);
       }

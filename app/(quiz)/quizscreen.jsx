@@ -6,6 +6,7 @@ import { AntDesign } from '@expo/vector-icons';
 import CustomButton from '../../components/CustomButton';
 import axios from 'axios';
 import { SERVER_URL } from '../../config';
+import * as Progress from 'react-native-progress';
 
 const QuizScreen = () => {
   const { currentQuestionIndex, score, incrementScore, nextQuestion } = useQuiz();
@@ -74,6 +75,10 @@ const QuizScreen = () => {
 
   return (
     <View style={showCorrectMessage ? styles.messageContainer : styles.questionContainer}>
+      <View style={styles.progressContainer}>
+          <Text style={styles.progressText}>Progress</Text>
+          <Progress.Bar progress={currentQuestionIndex / questionLength} width={250} color={'rgb(31, 73, 133)'} />
+        </View>
       {showCorrectMessage ? (
         <View style={styles.messageContainer}>
           <Text style={styles.correctMessage}>Correct!</Text>
@@ -132,14 +137,36 @@ const styles = StyleSheet.create({
   questionBoxContainer: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
   },
   questionBox: {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
     padding: 20,
-    marginHorizontal: 20,
+    width: '100%',
+    // marginHorizontal: 20,
     borderRadius: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 5,
+  },
+  progressText: {
+    fontSize: 13,
+    fontFamily: 'Poppins-Regular',
+    color: '#333',
+    marginBottom: 5,
+  },
+  progressContainer: {
+    backgroundColor: 'white',
+    paddingHorizontal: 15,
+    paddingtop: 10,
+    paddingBottom: 15,
+    borderRadius: 20,
+    alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
